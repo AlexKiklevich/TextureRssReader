@@ -1,0 +1,6 @@
+framework module Pods_TextureRssReader_TextureRssReaderUITests {
+  umbrella header "Pods-TextureRssReader-TextureRssReaderUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

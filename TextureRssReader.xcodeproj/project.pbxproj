@@ -1,0 +1,765 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24B2C1CA6A7F578800D3FA0E /* Pods_TextureRssReader_TextureRssReaderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B707354E3C33119D1D5A4C6 /* Pods_TextureRssReader_TextureRssReaderUITests.framework */; };
+		3FAE0934C0A70E46C9D2C35D /* Pods_TextureRssReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF827EE6A2E7D733E2E97D8 /* Pods_TextureRssReaderTests.framework */; };
+		E6C81DEA202556AE9E2C97E7 /* Pods_TextureRssReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1747975C27E6C3D4C49A8450 /* Pods_TextureRssReader.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB3D2B6A2F30C0DB00FBEE25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB3D2B4B2F30C0D900FBEE25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB3D2B522F30C0D900FBEE25;
+			remoteInfo = TextureRssReader;
+		};
+		EB3D2B742F30C0DB00FBEE25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB3D2B4B2F30C0D900FBEE25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB3D2B522F30C0D900FBEE25;
+			remoteInfo = TextureRssReader;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0757D719E10300985B71D0A5 /* Pods-TextureRssReaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReaderTests.debug.xcconfig"; path = "Target Support Files/Pods-TextureRssReaderTests/Pods-TextureRssReaderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1747975C27E6C3D4C49A8450 /* Pods_TextureRssReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureRssReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F96BAC261EEC94EB235B92A /* Pods-TextureRssReader-TextureRssReaderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReader-TextureRssReaderUITests.release.xcconfig"; path = "Target Support Files/Pods-TextureRssReader-TextureRssReaderUITests/Pods-TextureRssReader-TextureRssReaderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		78C59090D9595EF26D860CF6 /* Pods-TextureRssReader-TextureRssReaderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReader-TextureRssReaderUITests.debug.xcconfig"; path = "Target Support Files/Pods-TextureRssReader-TextureRssReaderUITests/Pods-TextureRssReader-TextureRssReaderUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B707354E3C33119D1D5A4C6 /* Pods_TextureRssReader_TextureRssReaderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureRssReader_TextureRssReaderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8035319825B05FA9CCE8F3E /* Pods-TextureRssReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReader.release.xcconfig"; path = "Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader.release.xcconfig"; sourceTree = "<group>"; };
+		BFF827EE6A2E7D733E2E97D8 /* Pods_TextureRssReaderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureRssReaderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7142C6E12A5059DC16A6CFB /* Pods-TextureRssReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReader.debug.xcconfig"; path = "Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader.debug.xcconfig"; sourceTree = "<group>"; };
+		D8ACDC3009C5C7E41CB39990 /* Pods-TextureRssReaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReaderTests.release.xcconfig"; path = "Target Support Files/Pods-TextureRssReaderTests/Pods-TextureRssReaderTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB3D2B532F30C0D900FBEE25 /* TextureRssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextureRssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3D2B692F30C0DB00FBEE25 /* TextureRssReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextureRssReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3D2B732F30C0DB00FBEE25 /* TextureRssReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextureRssReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EB3D2B7B2F30C0DB00FBEE25 /* Exceptions for "TextureRssReader" folder in "TextureRssReader" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EB3D2B522F30C0D900FBEE25 /* TextureRssReader */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EB3D2B552F30C0D900FBEE25 /* TextureRssReader */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EB3D2B7B2F30C0DB00FBEE25 /* Exceptions for "TextureRssReader" folder in "TextureRssReader" target */,
+			);
+			path = TextureRssReader;
+			sourceTree = "<group>";
+		};
+		EB3D2B6C2F30C0DB00FBEE25 /* TextureRssReaderTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TextureRssReaderTests;
+			sourceTree = "<group>";
+		};
+		EB3D2B762F30C0DB00FBEE25 /* TextureRssReaderUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TextureRssReaderUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB3D2B502F30C0D900FBEE25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6C81DEA202556AE9E2C97E7 /* Pods_TextureRssReader.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B662F30C0DB00FBEE25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FAE0934C0A70E46C9D2C35D /* Pods_TextureRssReaderTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B702F30C0DB00FBEE25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B2C1CA6A7F578800D3FA0E /* Pods_TextureRssReader_TextureRssReaderUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089E2960EC962E2540735FFA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7142C6E12A5059DC16A6CFB /* Pods-TextureRssReader.debug.xcconfig */,
+				A8035319825B05FA9CCE8F3E /* Pods-TextureRssReader.release.xcconfig */,
+				78C59090D9595EF26D860CF6 /* Pods-TextureRssReader-TextureRssReaderUITests.debug.xcconfig */,
+				5F96BAC261EEC94EB235B92A /* Pods-TextureRssReader-TextureRssReaderUITests.release.xcconfig */,
+				0757D719E10300985B71D0A5 /* Pods-TextureRssReaderTests.debug.xcconfig */,
+				D8ACDC3009C5C7E41CB39990 /* Pods-TextureRssReaderTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		0B2BEC1A191FA466663D319B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1747975C27E6C3D4C49A8450 /* Pods_TextureRssReader.framework */,
+				8B707354E3C33119D1D5A4C6 /* Pods_TextureRssReader_TextureRssReaderUITests.framework */,
+				BFF827EE6A2E7D733E2E97D8 /* Pods_TextureRssReaderTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB3D2B4A2F30C0D900FBEE25 = {
+			isa = PBXGroup;
+			children = (
+				EB3D2B552F30C0D900FBEE25 /* TextureRssReader */,
+				EB3D2B6C2F30C0DB00FBEE25 /* TextureRssReaderTests */,
+				EB3D2B762F30C0DB00FBEE25 /* TextureRssReaderUITests */,
+				EB3D2B542F30C0D900FBEE25 /* Products */,
+				089E2960EC962E2540735FFA /* Pods */,
+				0B2BEC1A191FA466663D319B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EB3D2B542F30C0D900FBEE25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB3D2B532F30C0D900FBEE25 /* TextureRssReader.app */,
+				EB3D2B692F30C0DB00FBEE25 /* TextureRssReaderTests.xctest */,
+				EB3D2B732F30C0DB00FBEE25 /* TextureRssReaderUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB3D2B522F30C0D900FBEE25 /* TextureRssReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB3D2B7C2F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReader" */;
+			buildPhases = (
+				47398D4E46437B3B524B9490 /* [CP] Check Pods Manifest.lock */,
+				EB3D2B4F2F30C0D900FBEE25 /* Sources */,
+				EB3D2B502F30C0D900FBEE25 /* Frameworks */,
+				EB3D2B512F30C0D900FBEE25 /* Resources */,
+				E06A7A66D30273068D319E5E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EB3D2B552F30C0D900FBEE25 /* TextureRssReader */,
+			);
+			name = TextureRssReader;
+			productName = TextureRssReader;
+			productReference = EB3D2B532F30C0D900FBEE25 /* TextureRssReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB3D2B682F30C0DB00FBEE25 /* TextureRssReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB3D2B812F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReaderTests" */;
+			buildPhases = (
+				27F5F5A27B6BF82974F2524E /* [CP] Check Pods Manifest.lock */,
+				EB3D2B652F30C0DB00FBEE25 /* Sources */,
+				EB3D2B662F30C0DB00FBEE25 /* Frameworks */,
+				EB3D2B672F30C0DB00FBEE25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB3D2B6B2F30C0DB00FBEE25 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EB3D2B6C2F30C0DB00FBEE25 /* TextureRssReaderTests */,
+			);
+			name = TextureRssReaderTests;
+			productName = TextureRssReaderTests;
+			productReference = EB3D2B692F30C0DB00FBEE25 /* TextureRssReaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EB3D2B722F30C0DB00FBEE25 /* TextureRssReaderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB3D2B842F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReaderUITests" */;
+			buildPhases = (
+				6D753DA21B6B2F150E0150A5 /* [CP] Check Pods Manifest.lock */,
+				EB3D2B6F2F30C0DB00FBEE25 /* Sources */,
+				EB3D2B702F30C0DB00FBEE25 /* Frameworks */,
+				EB3D2B712F30C0DB00FBEE25 /* Resources */,
+				1950FC9534AA51F145B86697 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB3D2B752F30C0DB00FBEE25 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EB3D2B762F30C0DB00FBEE25 /* TextureRssReaderUITests */,
+			);
+			name = TextureRssReaderUITests;
+			productName = TextureRssReaderUITests;
+			productReference = EB3D2B732F30C0DB00FBEE25 /* TextureRssReaderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB3D2B4B2F30C0D900FBEE25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2610;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					EB3D2B522F30C0D900FBEE25 = {
+						CreatedOnToolsVersion = 26.1;
+					};
+					EB3D2B682F30C0DB00FBEE25 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = EB3D2B522F30C0D900FBEE25;
+					};
+					EB3D2B722F30C0DB00FBEE25 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = EB3D2B522F30C0D900FBEE25;
+					};
+				};
+			};
+			buildConfigurationList = EB3D2B4E2F30C0D900FBEE25 /* Build configuration list for PBXProject "TextureRssReader" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB3D2B4A2F30C0D900FBEE25;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EB3D2B542F30C0D900FBEE25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB3D2B522F30C0D900FBEE25 /* TextureRssReader */,
+				EB3D2B682F30C0DB00FBEE25 /* TextureRssReaderTests */,
+				EB3D2B722F30C0DB00FBEE25 /* TextureRssReaderUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB3D2B512F30C0D900FBEE25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B672F30C0DB00FBEE25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B712F30C0DB00FBEE25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1950FC9534AA51F145B86697 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader-TextureRssReaderUITests/Pods-TextureRssReader-TextureRssReaderUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader-TextureRssReaderUITests/Pods-TextureRssReader-TextureRssReaderUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader-TextureRssReaderUITests/Pods-TextureRssReader-TextureRssReaderUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		27F5F5A27B6BF82974F2524E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextureRssReaderTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47398D4E46437B3B524B9490 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextureRssReader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D753DA21B6B2F150E0150A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TextureRssReader-TextureRssReaderUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E06A7A66D30273068D319E5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB3D2B4F2F30C0D900FBEE25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B652F30C0DB00FBEE25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3D2B6F2F30C0DB00FBEE25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB3D2B6B2F30C0DB00FBEE25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB3D2B522F30C0D900FBEE25 /* TextureRssReader */;
+			targetProxy = EB3D2B6A2F30C0DB00FBEE25 /* PBXContainerItemProxy */;
+		};
+		EB3D2B752F30C0DB00FBEE25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB3D2B522F30C0D900FBEE25 /* TextureRssReader */;
+			targetProxy = EB3D2B742F30C0DB00FBEE25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EB3D2B7D2F30C0DB00FBEE25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7142C6E12A5059DC16A6CFB /* Pods-TextureRssReader.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TextureRssReader/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EB3D2B7E2F30C0DB00FBEE25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8035319825B05FA9CCE8F3E /* Pods-TextureRssReader.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TextureRssReader/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		EB3D2B7F2F30C0DB00FBEE25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EB3D2B802F30C0DB00FBEE25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB3D2B822F30C0DB00FBEE25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0757D719E10300985B71D0A5 /* Pods-TextureRssReaderTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TextureRssReader.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TextureRssReader";
+			};
+			name = Debug;
+		};
+		EB3D2B832F30C0DB00FBEE25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8ACDC3009C5C7E41CB39990 /* Pods-TextureRssReaderTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TextureRssReader.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TextureRssReader";
+			};
+			name = Release;
+		};
+		EB3D2B852F30C0DB00FBEE25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78C59090D9595EF26D860CF6 /* Pods-TextureRssReader-TextureRssReaderUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReaderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TextureRssReader;
+			};
+			name = Debug;
+		};
+		EB3D2B862F30C0DB00FBEE25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F96BAC261EEC94EB235B92A /* Pods-TextureRssReader-TextureRssReaderUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F37BTB4JVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexKiklevich.TextureRssReaderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TextureRssReader;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB3D2B4E2F30C0D900FBEE25 /* Build configuration list for PBXProject "TextureRssReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3D2B7F2F30C0DB00FBEE25 /* Debug */,
+				EB3D2B802F30C0DB00FBEE25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB3D2B7C2F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3D2B7D2F30C0DB00FBEE25 /* Debug */,
+				EB3D2B7E2F30C0DB00FBEE25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB3D2B812F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3D2B822F30C0DB00FBEE25 /* Debug */,
+				EB3D2B832F30C0DB00FBEE25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB3D2B842F30C0DB00FBEE25 /* Build configuration list for PBXNativeTarget "TextureRssReaderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3D2B852F30C0DB00FBEE25 /* Debug */,
+				EB3D2B862F30C0DB00FBEE25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB3D2B4B2F30C0D900FBEE25 /* Project object */;
+}

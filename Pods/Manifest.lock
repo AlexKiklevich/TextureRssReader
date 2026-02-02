@@ -1,0 +1,66 @@
+PODS:
+  - PINCache (3.0.4):
+    - PINCache/Arc-exception-safe (= 3.0.4)
+    - PINCache/Core (= 3.0.4)
+  - PINCache/Arc-exception-safe (3.0.4):
+    - PINCache/Core
+  - PINCache/Core (3.0.4):
+    - PINOperation (~> 1.2.3)
+  - PINOperation (1.2.3)
+  - PINRemoteImage/Core (3.0.4):
+    - PINOperation
+  - PINRemoteImage/iOS (3.0.4):
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.4):
+    - PINCache (~> 3.0.4)
+    - PINRemoteImage/Core
+  - Realm (20.0.3):
+    - Realm/Headers (= 20.0.3)
+  - Realm/Headers (20.0.3)
+  - RealmSwift (20.0.3):
+    - Realm (= 20.0.3)
+  - Texture (3.2.0):
+    - Texture/AssetsLibrary (= 3.2.0)
+    - Texture/Core (= 3.2.0)
+    - Texture/MapKit (= 3.2.0)
+    - Texture/Photos (= 3.2.0)
+    - Texture/PINRemoteImage (= 3.2.0)
+    - Texture/Video (= 3.2.0)
+  - Texture/AssetsLibrary (3.2.0):
+    - Texture/Core
+  - Texture/Core (3.2.0)
+  - Texture/MapKit (3.2.0):
+    - Texture/Core
+  - Texture/Photos (3.2.0):
+    - Texture/Core
+  - Texture/PINRemoteImage (3.2.0):
+    - PINRemoteImage/iOS (~> 3.0.0)
+    - PINRemoteImage/PINCache
+    - Texture/Core
+  - Texture/Video (3.2.0):
+    - Texture/Core
+
+DEPENDENCIES:
+  - RealmSwift
+  - Texture
+
+SPEC REPOS:
+  trunk:
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
+    - Realm
+    - RealmSwift
+    - Texture
+
+SPEC CHECKSUMS:
+  PINCache: d9a87a0ff397acffe9e2f0db972ac14680441158
+  PINOperation: fb563bcc9c32c26d6c78aaff967d405aa2ee74a7
+  PINRemoteImage: 6256a644f4996991f124811763c7286b2a63ff94
+  Realm: 853e5089d6042dff807bda000277eadfe2da93d2
+  RealmSwift: f33c19577cefcbf681345d721fcbc7b42be4c949
+  Texture: 61e86ea2ee124f545be40293b54b5b8986006da2
+
+PODFILE CHECKSUM: 43fef03050c61f298501a8e677212b6471c6c572
+
+COCOAPODS: 1.16.1
