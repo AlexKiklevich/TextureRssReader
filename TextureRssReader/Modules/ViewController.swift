@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    private let rssService: RssService = DefaultRssService()
+final class ViewController: UIViewController {
+    private let rssManager = RssManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,6 @@ class ViewController: UIViewController {
             await loadRssChannels()
         }
     }
-
 
     private func loadRssChannels() async {
         guard let urlVedomosti = URL(string: "https://www.vedomosti.ru/info/rss"),
@@ -28,7 +27,20 @@ class ViewController: UIViewController {
             RssSource(title: "Vedomosti", url: urlVedomosti),
             RssSource(title: "Rbc", url: urlRbc)
         ]
-        let items = await rssService.fetchItems(sources: sources)
-        print(items)
+        rssManager.performFetch(sources: sources, delegate: self)
+    }
+}
+
+extension ViewController: RssManagerDelegate {
+    func didReceiveCatalog(_ result: RssCatalogResult, source: RssSource) {
+        print(result)
+    }
+    
+    func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssSource]) {
+        //print(result)
+    }
+    
+    func didReceiveUnsupported(_ result: RssUnsupportedResult, source: RssSource) {
+        print(result)
     }
 }

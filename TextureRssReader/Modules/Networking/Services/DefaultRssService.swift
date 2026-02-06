@@ -23,7 +23,7 @@ final class DefaultRssService: RssService {
         await withTaskGroup(of: RssFeedResult.self) { group in
             for source in sources {
                 group.addTask { [networkClient, parserFactory] in
-                    await Self.fetch(
+                    await self.fetch(
                         source: source,
                         networkClient: networkClient,
                         parser: parserFactory()
@@ -39,7 +39,11 @@ final class DefaultRssService: RssService {
         }
     }
 
-    private static func fetch(source: RssSource, networkClient: NetworkClient, parser: RssFeedParser) async -> RssFeedResult {
+    private func fetch(
+        source: RssSource,
+        networkClient: NetworkClient,
+        parser: RssFeedParser
+    ) async -> RssFeedResult {
         do {
             let data = try await networkClient.data(from: source.url)
             let string = String(data: data, encoding: .utf8)

@@ -8,10 +8,36 @@
 import Foundation
 
 final class RssFeedParser: NSObject {
+    
+    private struct Element {
+        static let item = "item"
+        static let title = "title"
+        static let link = "link"
+        static let guid = "guid"
+        static let description = "description"
+        static let contentEncoded = "content:encoded"
+        static let pubDate = "pubDate"
+        static let enclosure = "enclosure"
+        static let mediaContent = "media:content"
+        static let mediaThumbnail = "media:thumbnail"
+    }
+    
+    private struct AttributeKey {
+        static let type = "type"
+        static let medium = "medium"
+        static let url = "url"
+        static let href = "href"
+    }
+    
+    private struct AttributeConstant {
+        static let imageTypePrefix = "image/"
+        static let imageValue = "image"
+    }
+    
     private var items: [ParsedRssItem] = []
     private var currentItem: CurrentItem?
     private var currentText = ""
-    private let dateParser = RssDateParser()
+    private let dateFormatter = CommonDateFormatter.shared
 
     func parse(data: Data) throws -> [ParsedRssItem] {
         items = []
@@ -40,7 +66,7 @@ extension RssFeedParser: XMLParserDelegate {
         attributes attributeDict: [String: String] = [:]
     ) {
         currentText = ""
-        if elementName == "item" {
+        if elementName == Element.item {
             currentItem = CurrentItem()
             return
         }
@@ -63,7 +89,7 @@ extension RssFeedParser: XMLParserDelegate {
         namespaceURI: String?,
         qualifiedName qName: String?
     ) {
-        if elementName == "item" {
+        if elementName == Element.item {
             if let currentItem, let parsed = currentItem.toParsedItem() {
                 items.append(parsed)
             }
@@ -80,13 +106,13 @@ extension RssFeedParser: XMLParserDelegate {
         let text = currentText.trimmingCharacters(in: .whitespacesAndNewlines)
         if !text.isEmpty {
             switch elementName {
-            case "title":
+            case Element.title:
                 currentItem.title = text
-            case "link":
+            case Element.link:
                 currentItem.link = text
-            case "guid":
+            case Element.guid:
                 currentItem.guid = text
-            case "description":
+            case Element.description:
                 if currentItem.summary == nil {
                     currentItem.summary = text
                 }
@@ -94,14 +120,14 @@ extension RssFeedParser: XMLParserDelegate {
                    let imageUrl = Self.firstImageURL(in: text) {
                     currentItem.imageUrl = imageUrl
                 }
-            case "content:encoded":
+            case Element.contentEncoded:
                 currentItem.summary = text
                 if currentItem.imageUrl == nil,
                    let imageUrl = Self.firstImageURL(in: text) {
                     currentItem.imageUrl = imageUrl
                 }
-            case "pubDate":
-                currentItem.publishedAt = dateParser.parse(text)
+            case Element.pubDate:
+                currentItem.publishedAt = dateFormatter.formatDate(fromString: text)
             default:
                 break
             }
@@ -139,51 +165,23 @@ private struct CurrentItem {
     }
 }
 
-private struct RssDateParser {
-    private let formatters: [DateFormatter]
-
-    init() {
-        let locale = Locale(identifier: "en_US_POSIX")
-        let timezone = TimeZone(secondsFromGMT: 0)
-
-        func formatter(_ format: String) -> DateFormatter {
-            let formatter = DateFormatter()
-            formatter.locale = locale
-            formatter.timeZone = timezone
-            formatter.dateFormat = format
-            return formatter
-        }
-
-        formatters = [
-            formatter("EEE, dd MMM yyyy HH:mm:ss Z"),
-            formatter("EEE, dd MMM yyyy HH:mm Z"),
-            formatter("dd MMM yyyy HH:mm:ss Z"),
-            formatter("yyyy-MM-dd'T'HH:mm:ssZ"),
-            formatter("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        ]
-    }
-
-    func parse(_ string: String) -> Date? {
-        for formatter in formatters {
-            if let date = formatter.date(from: string) {
-                return date
-            }
-        }
-        return nil
-    }
-}
-
 private extension RssFeedParser {
     static func imageURL(from elementName: String, attributes: [String: String]) -> String? {
         let normalized = elementName.lowercased()
-        guard normalized == "enclosure" || normalized == "media:content" || normalized == "media:thumbnail" else {
+        guard normalized == Element.enclosure
+                || normalized == Element.mediaContent
+                || normalized == Element.mediaThumbnail else {
             return nil
         }
-        guard let urlString = attributes["url"] ?? attributes["href"] else { return nil }
+        guard let urlString = attributes[AttributeKey.url] ?? attributes[AttributeKey.href] else {
+            return nil
+        }
 
-        let type = attributes["type"]?.lowercased()
-        let medium = attributes["medium"]?.lowercased()
-        let isImage = (type?.hasPrefix("image/") ?? false) || medium == "image" || normalized == "media:thumbnail"
+        let type = attributes[AttributeKey.type]?.lowercased()
+        let medium = attributes[AttributeKey.medium]?.lowercased()
+        let isImage = (type?.hasPrefix(AttributeConstant.imageTypePrefix) ?? false)
+        || medium == AttributeConstant.imageValue
+        || normalized == Element.mediaThumbnail
         if isImage || (type == nil && medium == nil) {
             return urlString
         }
