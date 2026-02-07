@@ -2,6 +2,12 @@ import Foundation
 @preconcurrency import RealmSwift
 
 final class RealmProvider: @unchecked Sendable {
+    
+    struct ReadResult {
+        let catalog: RssCatalogSource
+        let rssItems: [RssItem]
+    }
+    
     private let configuration: Realm.Configuration
     private let queue = DispatchQueue(label: "TextureRssReader.RealmProvider", qos: .utility)
 
@@ -9,7 +15,7 @@ final class RealmProvider: @unchecked Sendable {
         self.configuration = configuration
     }
 
-    func save(items: [RssItem]) async throws {
+    func saveRss(items: [RssItem]) async throws {
         guard !items.isEmpty else { return }
         try await withCheckedThrowingContinuation { continuation in
             queue.async { [self] in
@@ -29,14 +35,19 @@ final class RealmProvider: @unchecked Sendable {
         }
     }
 
-    func read() async throws -> [RssItem] {
-        let result: [RssItem] = try await withCheckedThrowingContinuation { continuation in
+    func readRss(catalogs: [RssCatalogSource]) async throws -> [ReadResult] {
+        let result: [ReadResult] = try await withCheckedThrowingContinuation { continuation in
             queue.async { [self] in
                 autoreleasepool {
                     do {
                         let realm = try Realm(configuration: configuration)
                         let objects = realm.objects(StoredRssItem.self)
-                        continuation.resume(returning: objects.compactMap { $0.toRssItem() })
+                        var results = [ReadResult]()
+                        for catalog in catalogs {
+                            let items = objects.filter("catalogURL == %@", catalog.url.absoluteString)
+                            results.append(ReadResult(catalog: catalog, rssItems: items.compactMap { $0.toRssItem() }))
+                        }
+                        continuation.resume(returning: results)
                     } catch {
                         continuation.resume(throwing: error)
                     }
@@ -45,51 +56,49 @@ final class RealmProvider: @unchecked Sendable {
         }
         return result
     }
-}
 
-@objc(StoredRssItem)
-private final class StoredRssItem: Object {
-    @Persisted(primaryKey: true) var id: String = ""
-    @Persisted var title: String = ""
-    @Persisted var link: String?
-    @Persisted var summary: String?
-    @Persisted var publishedAt: Date?
-    @Persisted var imageURL: String?
-    @Persisted var sourceTitle: String = ""
-    @Persisted var sourceURL: String = ""
-    @Persisted var storedAt: Date = Date()
-
-    convenience init(item: RssItem) {
-        self.init()
-        id = Self.makeID(for: item)
-        title = item.title
-        link = item.link?.absoluteString
-        summary = item.summary
-        publishedAt = item.publishedAt
-        imageURL = item.imageURL?.absoluteString
-        sourceTitle = item.source.title
-        sourceURL = item.source.url.absoluteString
-        storedAt = Date()
-    }
-
-    func toRssItem() -> RssItem? {
-        guard let sourceURL = URL(string: sourceURL) else { return nil }
-        return RssItem(
-            title: title,
-            link: link.flatMap(URL.init(string:)),
-            summary: summary,
-            publishedAt: publishedAt,
-            imageURL: imageURL.flatMap(URL.init(string:)),
-            source: RssSource(title: sourceTitle, url: sourceURL)
-        )
-    }
-
-    nonisolated private static func makeID(for item: RssItem) -> String {
-        let sourcePart = item.source.url.absoluteString
-        if let link = item.link?.absoluteString, !link.isEmpty {
-            return sourcePart + "|" + link
+    func saveCatalog(result: RssCatalogResult) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            queue.async { [self] in
+                autoreleasepool {
+                    do {
+                        let realm = try Realm(configuration: configuration)
+                        let object = StoredRssCatalog(result: result)
+                        try realm.write {
+                            if let existingObject = realm.object(
+                                ofType: StoredRssCatalog.self,
+                                forPrimaryKey: object.id
+                            ) {
+                                realm.delete(existingObject)
+                            }
+                            realm.add(object, update: .modified)
+                        }
+                        continuation.resume(returning: ())
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
         }
-        let datePart = String(item.publishedAt?.timeIntervalSince1970 ?? 0)
-        return sourcePart + "|" + item.title + "|" + datePart
+    }
+
+    func readCatalog(source: RssCatalogSource) async throws -> RssCatalogResult? {
+        let result: RssCatalogResult? = try await withCheckedThrowingContinuation { continuation in
+            queue.async { [self] in
+                autoreleasepool {
+                    do {
+                        let realm = try Realm(configuration: configuration)
+                        let object = realm.object(
+                            ofType: StoredRssCatalog.self,
+                            forPrimaryKey: source.url.absoluteString
+                        )
+                        continuation.resume(returning: object?.toRssCatalogResult())
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+        return result
     }
 }

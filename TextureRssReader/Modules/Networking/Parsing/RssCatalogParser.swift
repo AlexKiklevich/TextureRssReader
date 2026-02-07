@@ -14,22 +14,16 @@ final class RssCatalogParser {
         static let urlIndicators = ["http://", "https://", "www.", "/rss"]
     }
     
-    func parse(data: Data, baseURL: URL?) throws -> [RssSource] {
+    func parse(data: Data, baseURL: URL?) throws -> [URL] {
         guard let html = String(data: data, encoding: .utf8) else {
             throw RssCatalogParsingError.invalidEncoding
         }
 
-        var sources: [RssSource] = []
+        var items: [URL] = []
         var seen = Set<URL>()
         var index = html.startIndex
-        var lastLabel: String?
 
         while let anchorStart = html.range(of: "<a", options: [.caseInsensitive], range: index..<html.endIndex) {
-            let textChunk = String(html[index..<anchorStart.lowerBound])
-            if let labelCandidate = Self.lastLabelCandidate(from: textChunk) {
-                lastLabel = labelCandidate
-            }
-
             guard let tagEnd = html.range(of: ">", range: anchorStart.lowerBound..<html.endIndex) else {
                 break
             }
@@ -49,12 +43,11 @@ final class RssCatalogParser {
             guard Self.isLikelyRssURL(url) else { continue }
             guard !seen.contains(url) else { continue }
 
-            let resolvedTitle = Self.resolveTitle(anchorText: anchorText, fallback: lastLabel, url: url)
-            sources.append(RssSource(title: resolvedTitle, url: url))
+            items.append(url)
             seen.insert(url)
         }
 
-        return sources
+        return items
     }
 }
 
@@ -83,19 +76,6 @@ private extension RssCatalogParser {
         return nil
     }
 
-    static func resolveTitle(anchorText: String, fallback: String?, url: URL) -> String {
-        let cleanedAnchor = cleanText(anchorText)
-        if cleanedAnchor.isEmpty || looksLikeURL(cleanedAnchor) {
-            if let fallback, !fallback.isEmpty {
-                return fallback
-            }
-        }
-        if cleanedAnchor.isEmpty {
-            return url.absoluteString
-        }
-        return cleanedAnchor
-    }
-
     static func looksLikeURL(_ text: String) -> Bool {
         let lower = text.lowercased()
         return Constants.urlIndicators.contains { lower.contains($0) }
@@ -104,17 +84,6 @@ private extension RssCatalogParser {
     static func isLikelyRssURL(_ url: URL) -> Bool {
         let lower = url.absoluteString.lowercased()
         return Constants.rssIndicators.contains { lower.contains($0) }
-    }
-
-    static func lastLabelCandidate(from text: String) -> String? {
-        let cleaned = cleanText(text)
-        guard !cleaned.isEmpty else { return nil }
-        let separators = CharacterSet(charactersIn: "\n\r•|—")
-        let parts = cleaned
-            .components(separatedBy: separators)
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-        return parts.last
     }
 
     static func cleanText(_ text: String) -> String {

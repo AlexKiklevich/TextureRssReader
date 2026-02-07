@@ -6,7 +6,7 @@
 //
 
 struct RssFeedResult: Hashable {
-    let source: RssSource
+    let source: RssItemSource
     let items: [RssItem]
     let error: RssServiceError?
 }

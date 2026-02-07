@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RssService {
-    func fetchItems(sources: [RssSource]) async -> [RssFeedResult]
+    func fetchItems(sources: [RssItemSource]) async -> [RssFeedResult]
 }
 
 final class DefaultRssService: RssService {
@@ -23,7 +23,7 @@ final class DefaultRssService: RssService {
         self.parserFactory = parserFactory
     }
 
-    func fetchItems(sources: [RssSource]) async -> [RssFeedResult] {
+    func fetchItems(sources: [RssItemSource]) async -> [RssFeedResult] {
         await withTaskGroup(of: RssFeedResult.self) { group in
             for source in sources {
                 group.addTask { [networkClient, parserFactory] in
@@ -44,7 +44,7 @@ final class DefaultRssService: RssService {
     }
 
     private func fetch(
-        source: RssSource,
+        source: RssItemSource,
         networkClient: NetworkClient,
         parser: RssFeedParser
     ) async -> RssFeedResult {

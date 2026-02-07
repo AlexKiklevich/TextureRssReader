@@ -25,32 +25,32 @@ final class MainViewController: UIViewController {
             return
         }
         let sources = [
-            RssSource(title: "Vedomosti", url: urlVedomosti),
-            RssSource(title: "Rbc", url: urlRbc)
+            RssCatalogSource(title: "Vedomosti", url: urlVedomosti),
+            RssCatalogSource(title: "Rbc", url: urlRbc)
         ]
-        rssManager.performFetch(sources: sources, delegate: self)
+        rssManager.performFetch(catalogs: sources, delegate: self)
     }
 }
 
 extension MainViewController: RssManagerDelegate {
-    func didReceiveCatalog(_ result: RssCatalogResult, source: RssSource) {
+    func didReceiveCatalog(_ result: RssCatalogResult, source: RssCatalogSource) {
         print(result)
     }
     
-    func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssSource]) {
+    func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssItemSource]) {
         guard let items = result.first?.items else {
             return
         }
         Task.detached { [weak self] in
             do {
-                try await self?.realmProvider.save(items: items)
+                try await self?.realmProvider.saveRss(items: items)
             }
             catch let error {
                 print("Failed to save items: \(error)")
                 return
             }
             do {
-                let items = try await self?.realmProvider.read()
+                let items = try await self?.realmProvider.readRss(catalogs: items.map { $0.source.catalog })
                 print("Saved items: \(items ?? [])")
             }
             catch let error {
@@ -59,7 +59,7 @@ extension MainViewController: RssManagerDelegate {
         }
     }
     
-    func didReceiveUnsupported(_ result: RssUnsupportedResult, source: RssSource) {
+    func didReceiveUnsupported(_ result: RssUnsupportedResult, url: URL) {
         print(result)
     }
 }
