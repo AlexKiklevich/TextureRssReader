@@ -9,6 +9,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     private let rssManager = RssManager()
+    private let realmProvider = RealmProvider()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,25 @@ extension ViewController: RssManagerDelegate {
     }
     
     func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssSource]) {
-        //print(result)
+        guard let items = result.first?.items else {
+            return
+        }
+        Task.detached { [weak self] in
+            do {
+                try await self?.realmProvider.save(items: items)
+            }
+            catch let error {
+                print("Failed to save items: \(error)")
+                return
+            }
+            do {
+                let items = try await self?.realmProvider.read()
+                print("Saved items: \(items ?? [])")
+            }
+            catch let error {
+                print("Failed to fetch items: \(error)")
+            }
+        }
     }
     
     func didReceiveUnsupported(_ result: RssUnsupportedResult, source: RssSource) {

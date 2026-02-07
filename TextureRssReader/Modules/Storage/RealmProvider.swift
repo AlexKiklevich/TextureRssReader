@@ -47,6 +47,7 @@ final class RealmProvider: @unchecked Sendable {
     }
 }
 
+@objc(StoredRssItem)
 private final class StoredRssItem: Object {
     @Persisted(primaryKey: true) var id: String = ""
     @Persisted var title: String = ""
