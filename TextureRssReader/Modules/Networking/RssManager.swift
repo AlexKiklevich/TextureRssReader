@@ -71,7 +71,7 @@ final class RssManager {
     }
 
     private func handleCatalog(_ source: RssSource, delegate: RssManagerDelegate) async {
-        let catalogResult = await catalogService.fetchCatalog(from: source.url)
+        let catalogResult = await catalogService.fetchCatalog(from: source)
         guard let error = catalogResult.error else {
             delegate.didReceiveCatalog(catalogResult, source: source)
             return

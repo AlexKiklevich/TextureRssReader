@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
     private let rssManager = RssManager()
     private let realmProvider = RealmProvider()
 
@@ -32,7 +32,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: RssManagerDelegate {
+extension MainViewController: RssManagerDelegate {
     func didReceiveCatalog(_ result: RssCatalogResult, source: RssSource) {
         print(result)
     }

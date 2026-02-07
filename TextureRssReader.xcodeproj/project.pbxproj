@@ -13,7 +13,7 @@
 		EB39D5052F374C4100C7E75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB39D4FF2F374C4100C7E75C /* Assets.xcassets */; };
 		EB39D5072F374C4100C7E75C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB39D5022F374C4100C7E75C /* LaunchScreen.storyboard */; };
 		EB39D5082F374C4100C7E75C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4DE2F374C4100C7E75C /* DateFormatter.swift */; };
-		EB39D5092F374C4100C7E75C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4E02F374C4100C7E75C /* ViewController.swift */; };
+		EB39D5092F374C4100C7E75C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4E02F374C4100C7E75C /* MainViewController.swift */; };
 		EB39D50A2F374C4100C7E75C /* NetworkClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4E42F374C4100C7E75C /* NetworkClientError.swift */; };
 		EB39D50B2F374C4100C7E75C /* RssCatalogParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4E52F374C4100C7E75C /* RssCatalogParsingError.swift */; };
 		EB39D50C2F374C4100C7E75C /* RssCatalogServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D4E62F374C4100C7E75C /* RssCatalogServiceError.swift */; };
@@ -42,6 +42,8 @@
 		EB39D52D2F374C4800C7E75C /* rss_sample_2.xml in Resources */ = {isa = PBXBuildFile; fileRef = EB39D5202F374C4800C7E75C /* rss_sample_2.xml */; };
 		EB39D5312F374C4C00C7E75C /* TextureRssReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D52E2F374C4C00C7E75C /* TextureRssReaderUITests.swift */; };
 		EB39D5322F374C4C00C7E75C /* TextureRssReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D52F2F374C4C00C7E75C /* TextureRssReaderUITestsLaunchTests.swift */; };
+		EB39D5342F374D0000C7E75C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D5332F374D0000C7E75C /* MainView.swift */; };
+		EB39D5362F374D0900C7E75C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39D5352F374D0900C7E75C /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +74,7 @@
 		D7142C6E12A5059DC16A6CFB /* Pods-TextureRssReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReader.debug.xcconfig"; path = "Target Support Files/Pods-TextureRssReader/Pods-TextureRssReader.debug.xcconfig"; sourceTree = "<group>"; };
 		D8ACDC3009C5C7E41CB39990 /* Pods-TextureRssReaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureRssReaderTests.release.xcconfig"; path = "Target Support Files/Pods-TextureRssReaderTests/Pods-TextureRssReaderTests.release.xcconfig"; sourceTree = "<group>"; };
 		EB39D4DE2F374C4100C7E75C /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		EB39D4E02F374C4100C7E75C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EB39D4E02F374C4100C7E75C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EB39D4E42F374C4100C7E75C /* NetworkClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientError.swift; sourceTree = "<group>"; };
 		EB39D4E52F374C4100C7E75C /* RssCatalogParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssCatalogParsingError.swift; sourceTree = "<group>"; };
 		EB39D4E62F374C4100C7E75C /* RssCatalogServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssCatalogServiceError.swift; sourceTree = "<group>"; };
@@ -104,6 +106,8 @@
 		EB39D5262F374C4800C7E75C /* TextureRssReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureRssReaderTests.swift; sourceTree = "<group>"; };
 		EB39D52E2F374C4C00C7E75C /* TextureRssReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureRssReaderUITests.swift; sourceTree = "<group>"; };
 		EB39D52F2F374C4C00C7E75C /* TextureRssReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureRssReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EB39D5332F374D0000C7E75C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		EB39D5352F374D0900C7E75C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		EB3D2B532F30C0D900FBEE25 /* TextureRssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextureRssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3D2B692F30C0DB00FBEE25 /* TextureRssReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextureRssReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3D2B732F30C0DB00FBEE25 /* TextureRssReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextureRssReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +175,9 @@
 		EB39D4E12F374C4100C7E75C /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				EB39D4E02F374C4100C7E75C /* ViewController.swift */,
+				EB39D4E02F374C4100C7E75C /* MainViewController.swift */,
+				EB39D5332F374D0000C7E75C /* MainView.swift */,
+				EB39D5352F374D0900C7E75C /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -607,7 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB39D5082F374C4100C7E75C /* DateFormatter.swift in Sources */,
-				EB39D5092F374C4100C7E75C /* ViewController.swift in Sources */,
+				EB39D5092F374C4100C7E75C /* MainViewController.swift in Sources */,
 				EB39D50A2F374C4100C7E75C /* NetworkClientError.swift in Sources */,
 				EB39D50B2F374C4100C7E75C /* RssCatalogParsingError.swift in Sources */,
 				EB39D50C2F374C4100C7E75C /* RssCatalogServiceError.swift in Sources */,
@@ -625,9 +631,11 @@
 				EB39D5182F374C4100C7E75C /* RssCatalogService.swift in Sources */,
 				EB39D5192F374C4100C7E75C /* RssService.swift in Sources */,
 				EB39D51A2F374C4100C7E75C /* RssManager.swift in Sources */,
+				EB39D5342F374D0000C7E75C /* MainView.swift in Sources */,
 				EB39D51B2F374C4100C7E75C /* RealmProvider.swift in Sources */,
 				EB39D51C2F374C4100C7E75C /* AppDelegate.swift in Sources */,
 				EB39D51D2F374C4100C7E75C /* SceneDelegate.swift in Sources */,
+				EB39D5362F374D0900C7E75C /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
