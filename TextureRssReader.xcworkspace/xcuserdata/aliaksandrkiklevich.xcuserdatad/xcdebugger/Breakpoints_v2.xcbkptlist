@@ -30,25 +30,9 @@
             filePath = "TextureRssReader/Modules/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "didReceiveCatalog(_:source:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E6F2A0CF-679E-4651-A307-501E798E6949"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TextureRssReader/Modules/ViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "didReceiveFeedItems(_:sources:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,8 +46,8 @@
             filePath = "TextureRssReader/Modules/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "didReceiveUnsupported(_:source:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,6 +174,188 @@
             endingLineNumber = "36"
             landmarkName = "formatDate(fromString:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54EC3D6E-BC6D-489B-BAD8-07F30B39D0C1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TextureRssReader/Modules/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "didReceiveFeedItems(_:sources:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3B14121-2E3D-4CE0-B82C-6995CAFAC013"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TextureRssReader/Modules/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "didReceiveFeedItems(_:sources:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74794E7C-3C46-4297-96F1-E1DB0C9EC46D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TextureRssReader/Modules/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "didReceiveFeedItems(_:sources:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE93752D-7BDE-45FC-B49B-718D3566D205"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TextureRssReader/Modules/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "didReceiveFeedItems(_:sources:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DE93752D-7BDE-45FC-B49B-718D3566D205 - 2d00343ae91fd3f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54">
+               </Location>
+               <Location
+                  uuid = "DE93752D-7BDE-45FC-B49B-718D3566D205 - 7cfe3d843d6d5bf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54">
+               </Location>
+               <Location
+                  uuid = "DE93752D-7BDE-45FC-B49B-718D3566D205 - cc6c254f70b2c3fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8849587-2130-494E-9CAF-422BE1976949"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TextureRssReader/Modules/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "didReceiveFeedItems(_:sources:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B8849587-2130-494E-9CAF-422BE1976949 - 3c728f066c706157"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
+               </Location>
+               <Location
+                  uuid = "B8849587-2130-494E-9CAF-422BE1976949 - e814efaf9ef77529"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
+               </Location>
+               <Location
+                  uuid = "B8849587-2130-494E-9CAF-422BE1976949 - 2d00343ae91fd2a0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
+               </Location>
+               <Location
+                  uuid = "B8849587-2130-494E-9CAF-422BE1976949 - 7cfe3d843d6d5aa4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in TextureRssReader.ViewController.didReceiveFeedItems(_: Swift.Array&lt;TextureRssReader.RssFeedResult&gt;, sources: Swift.Array&lt;TextureRssReader.RssSource&gt;) -&gt; ()"
+                  moduleName = "TextureRssReader.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aliaksandrkiklevich/Documents/TextureRssReader/TextureRssReader/Modules/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
