@@ -48,8 +48,8 @@ final class RssFeedParser: NSObject {
         parser.delegate = self
         let success = parser.parse()
         if !success {
-            if let error = parser.parserError {
-                throw error
+            if parser.parserError != nil {
+                throw RssParsingError.parsingFailed
             }
             throw RssParsingError.parsingFailed
         }

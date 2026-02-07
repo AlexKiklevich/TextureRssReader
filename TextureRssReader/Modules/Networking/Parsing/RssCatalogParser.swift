@@ -62,10 +62,11 @@ private extension RssCatalogParser {
     static func resolveURL(_ href: String, baseURL: URL?) -> URL? {
         let trimmed = href.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
-        if let url = URL(string: trimmed) {
-            return url
+        if let baseURL,
+           let resolved = URL(string: trimmed, relativeTo: baseURL)?.absoluteURL {
+            return resolved
         }
-        return baseURL.flatMap { URL(string: trimmed, relativeTo: $0)?.absoluteURL }
+        return URL(string: trimmed)
     }
 
     static func extractHref(from tag: String) -> String? {

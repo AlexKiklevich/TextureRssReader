@@ -44,9 +44,16 @@ final class DefaultRssService: RssService {
         networkClient: NetworkClient,
         parser: RssFeedParser
     ) async -> RssFeedResult {
+        let data: Data
         do {
-            let data = try await networkClient.data(from: source.url)
-            let string = String(data: data, encoding: .utf8)
+            data = try await networkClient.data(from: source.url)
+        } catch let error as NetworkClientError {
+            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
+        } catch {
+            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
+        }
+
+        do {
             let parsedItems = try parser.parse(data: data)
             let items = parsedItems.map { parsed in
                 RssItem(
@@ -59,12 +66,10 @@ final class DefaultRssService: RssService {
                 )
             }
             return RssFeedResult(source: source, items: items, error: nil)
-        } catch let error as NetworkClientError {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
         } catch let error as RssParsingError {
             return RssFeedResult(source: source, items: [], error: RssServiceError(parsingError: error))
         } catch {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
+            return RssFeedResult(source: source, items: [], error: RssServiceError(parsingError: error))
         }
     }
 }

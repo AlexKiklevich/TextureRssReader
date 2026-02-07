@@ -20,16 +20,22 @@ final class DefaultRssCatalogService: RssCatalogService {
     }
 
     func fetchCatalog(from url: URL) async -> RssCatalogResult {
+        let data: Data
         do {
-            let data = try await networkClient.data(from: url)
-            let sources = try parserFactory().parse(data: data, baseURL: url)
-            return RssCatalogResult(catalogURL: url, sources: sources, error: nil)
+            data = try await networkClient.data(from: url)
         } catch let error as NetworkClientError {
             return RssCatalogResult(catalogURL: url, sources: [], error: RssCatalogServiceError(networkError: error))
+        } catch {
+            return RssCatalogResult(catalogURL: url, sources: [], error: RssCatalogServiceError(networkError: error))
+        }
+
+        do {
+            let sources = try parserFactory().parse(data: data, baseURL: url)
+            return RssCatalogResult(catalogURL: url, sources: sources, error: nil)
         } catch let error as RssCatalogParsingError {
             return RssCatalogResult(catalogURL: url, sources: [], error: RssCatalogServiceError(parsingError: error))
         } catch {
-            return RssCatalogResult(catalogURL: url, sources: [], error: RssCatalogServiceError(networkError: error))
+            return RssCatalogResult(catalogURL: url, sources: [], error: RssCatalogServiceError(parsingError: error))
         }
     }
 }
