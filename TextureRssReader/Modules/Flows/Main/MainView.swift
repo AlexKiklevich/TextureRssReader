@@ -50,6 +50,7 @@ final class MainView: ASDisplayNode {
 
     var onPrefetch: (() -> Void)?
     var onToggleSection: ((UUID) -> Void)?
+    var onSelectNews: ((NewsCellViewModel) -> Void)?
 
     override init() {
         super.init()
@@ -480,5 +481,14 @@ extension MainView: ASTableDelegate {
     func tableNode(_ tableNode: ASTableNode, willBeginBatchFetchWith context: ASBatchContext) {
         onPrefetch?()
         context.completeBatchFetching(true)
+    }
+
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        tableNode.deselectRow(at: indexPath, animated: true)
+        guard indexPath.row > 0,
+              let viewModel = rowViewModel(for: indexPath) else {
+            return
+        }
+        onSelectNews?(viewModel)
     }
 }

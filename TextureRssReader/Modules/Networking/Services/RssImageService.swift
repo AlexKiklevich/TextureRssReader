@@ -1,5 +1,5 @@
 //
-//  RssImageCache.swift
+//  RssImageService.swift
 //  TextureRssReader
 //
 //  Created by Aliaksandr Kiklevich on 8.02.26.
@@ -7,11 +7,12 @@
 
 import AsyncDisplayKit
 
-protocol RssImageCache: ASImageCacheProtocol {
+protocol RssImageService: ASImageCacheProtocol {
+    var downloader: ASPINRemoteImageDownloader { get }
     func imageDidLoad(_ image: UIImage, withInfo info: ASNetworkImageLoadInfo)
 }
 
-final class DefaultRssImageCache: NSObject, RssImageCache {
+final class DefaultRssImageService: NSObject, RssImageService {
     
     private struct Constants {
         let totalCostLimit: Int = 100 * 1024 * 1024 // 100 MB
@@ -21,6 +22,7 @@ final class DefaultRssImageCache: NSObject, RssImageCache {
         cache.totalCostLimit = Constants().totalCostLimit
         return cache
     }()
+    let downloader = ASPINRemoteImageDownloader.shared()
     
     func cachedImage(
         with URL: URL,

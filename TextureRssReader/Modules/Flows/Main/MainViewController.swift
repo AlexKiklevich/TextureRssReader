@@ -9,7 +9,7 @@ import UIKit
 import AsyncDisplayKit
 
 final class MainViewController: UIViewController {
-    private let viewModel = MainViewModel()
+    private let viewModel: MainViewModel
     private let mainViewNode = MainView()
     private let screenTitleLabel = UILabel()
     private let displayModeButton = UIButton(type: .system)
@@ -20,6 +20,16 @@ final class MainViewController: UIViewController {
         stackView.alignment = .center
         return stackView
     }()
+
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +73,9 @@ final class MainViewController: UIViewController {
     private func setupMainViewCallbacks() {
         mainViewNode.onToggleSection = { [weak self] sectionID in
             self?.viewModel.toggleSection(id: sectionID)
+        }
+        mainViewNode.onSelectNews = { [weak self] newsCellViewModel in
+            self?.viewModel.selectNews(newsCellViewModel)
         }
     }
 

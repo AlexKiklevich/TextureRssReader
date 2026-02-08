@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var mainFlowCoordinator: MainFlowCoordinator?
+    private let appService = AppService()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let router = NavigationRouter()
-        let coordinator = MainFlowCoordinator(router: router)
+        let coordinator = MainFlowCoordinator(router: router, appService: appService)
         coordinator.start()
 
         window.rootViewController = router.rootViewController

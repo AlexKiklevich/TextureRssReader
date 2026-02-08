@@ -9,11 +9,11 @@ import AsyncDisplayKit
 
 struct NewsCellViewModel {
     let item: NewsRowModel
-    let imageCache: RssImageCache
+    let imageService: RssImageService
     
-    init(item: NewsRowModel, imageCache: RssImageCache) {
+    init(item: NewsRowModel, imageService: RssImageService) {
         self.item = item
-        self.imageCache = imageCache
+        self.imageService = imageService
     }
 }
     

@@ -8,18 +8,17 @@
 import AsyncDisplayKit
 
 final class NewsImageNode: ASNetworkImageNode {
-    private let cache: RssImageCache
-    private let downloader = ASPINRemoteImageDownloader.shared()
+    private let service: RssImageService
     
-    init(cache: RssImageCache) {
-        self.cache = cache
-        super.init(cache: cache, downloader: downloader)
+    init(service: RssImageService) {
+        self.service = service
+        super.init(cache: service, downloader: service.downloader)
         self.delegate = self
     }
 }
 
 extension NewsImageNode: ASNetworkImageNodeDelegate {
     func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage, info: ASNetworkImageLoadInfo) {
-        cache.imageDidLoad(image, withInfo: info)
+        service.imageDidLoad(image, withInfo: info)
     }
 }

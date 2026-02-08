@@ -28,10 +28,11 @@ final class MainViewModel {
         static let uiUpdateThrottleInterval: TimeInterval = 0.12
     }
 
-    private let rssManager = RssManager()
-    private let imageCache: RssImageCache = DefaultRssImageCache()
+    private let rssManager: RssManager
+    private let imageService: RssImageService
 
     weak var delegate: MainViewModelDelegate?
+    weak var coordinator: MainFlowCoordinating?
 
     private var displayMode: NewsDisplayMode = .common
     private var isFetching = false
@@ -40,6 +41,12 @@ final class MainViewModel {
     private var sectionOrder: [String] = []
     private var hasPendingUIUpdate = false
     private var pendingUIWorkItem: DispatchWorkItem?
+
+    init(coordinator: MainFlowCoordinating, appService: AppService) {
+        self.coordinator = coordinator
+        self.rssManager = appService.rssManager
+        self.imageService = appService.rssImageService
+    }
 
     func viewDidLoad() {
         notifyDelegate()
@@ -72,6 +79,10 @@ final class MainViewModel {
         section.isExpanded.toggle()
         sectionsByCatalog[sectionKey] = section
         notifyDelegate()
+    }
+
+    func selectNews(_ newsCellViewModel: NewsCellViewModel) {
+        coordinator?.showNewspaper(with: newsCellViewModel)
     }
 }
 
@@ -161,7 +172,9 @@ private extension MainViewModel {
     func makeCellViewModelsBySectionID(from sections: [NewsSectionModel]) -> [UUID: [NewsCellViewModel]] {
         var result: [UUID: [NewsCellViewModel]] = [:]
         for section in sections {
-            result[section.id] = section.items.map { NewsCellViewModel(item: $0, imageCache: imageCache) }
+            result[section.id] = section.items.map {
+                NewsCellViewModel(item: $0, imageService: imageService)
+            }
         }
         return result
     }

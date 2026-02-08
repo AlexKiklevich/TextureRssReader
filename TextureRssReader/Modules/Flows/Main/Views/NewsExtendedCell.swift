@@ -27,7 +27,7 @@ final class NewsExtendedCell: ASCellNode {
 
     init(viewModel: NewsCellViewModel) {
         self.viewModel = viewModel
-        self.imageNode = NewsImageNode(cache: viewModel.imageCache)
+        self.imageNode = NewsImageNode(service: viewModel.imageService)
         super.init()
         automaticallyManagesSubnodes = true
         selectionStyle = .none
