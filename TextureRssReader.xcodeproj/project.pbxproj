@@ -57,6 +57,8 @@
 		EB976B3C2F37889600ABBE20 /* StoredRssCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB976B3B2F37889600ABBE20 /* StoredRssCatalog.swift */; };
 		EB976B3E2F3788A300ABBE20 /* StoredRssItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB976B3D2F3788A300ABBE20 /* StoredRssItem.swift */; };
 		EB976B422F378D9C00ABBE20 /* RssItemSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB976B412F378D9C00ABBE20 /* RssItemSnapshot.swift */; };
+		EBD7F3D52F38EA0800529A74 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7F3D42F38EA0800529A74 /* Router.swift */; };
+		EBD7F3D72F38EA2300529A74 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7F3D62F38EA2300529A74 /* MainFlowCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +139,8 @@
 		EB976B3B2F37889600ABBE20 /* StoredRssCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredRssCatalog.swift; sourceTree = "<group>"; };
 		EB976B3D2F3788A300ABBE20 /* StoredRssItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredRssItem.swift; sourceTree = "<group>"; };
 		EB976B412F378D9C00ABBE20 /* RssItemSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssItemSnapshot.swift; sourceTree = "<group>"; };
+		EBD7F3D42F38EA0800529A74 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		EBD7F3D62F38EA2300529A74 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,7 @@
 				EB39D5332F374D0000C7E75C /* MainView.swift */,
 				EB39D5352F374D0900C7E75C /* MainViewModel.swift */,
 				EB257DC22F38A18100BE6032 /* MainFlowBuilder.swift */,
+				EBD7F3D62F38EA2300529A74 /* MainFlowCoordinator.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 		EB39D4FD2F374C4100C7E75C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EBD7F3D32F38E9F900529A74 /* Router */,
 				EB39D4DF2F374C4100C7E75C /* Common */,
 				EB39D4E32F374C4100C7E75C /* Flows */,
 				EB39D4FA2F374C4100C7E75C /* Networking */,
@@ -431,6 +437,14 @@
 				EB976B3D2F3788A300ABBE20 /* StoredRssItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EBD7F3D32F38E9F900529A74 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EBD7F3D42F38EA0800529A74 /* Router.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,7 +702,9 @@
 				EB39D5092F374C4100C7E75C /* MainViewController.swift in Sources */,
 				EB257DB42F38737200BE6032 /* NewsSection.swift in Sources */,
 				EB39D50A2F374C4100C7E75C /* NetworkClientError.swift in Sources */,
+				EBD7F3D72F38EA2300529A74 /* MainFlowCoordinator.swift in Sources */,
 				EB39D50B2F374C4100C7E75C /* RssCatalogParsingError.swift in Sources */,
+				EBD7F3D52F38EA0800529A74 /* Router.swift in Sources */,
 				EB39D50C2F374C4100C7E75C /* RssCatalogServiceError.swift in Sources */,
 				EB39D50D2F374C4100C7E75C /* RssParsingError.swift in Sources */,
 				EB39D50E2F374C4100C7E75C /* RssServiceError.swift in Sources */,
