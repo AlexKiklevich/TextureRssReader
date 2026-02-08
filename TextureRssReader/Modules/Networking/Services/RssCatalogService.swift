@@ -28,24 +28,32 @@ final class DefaultRssCatalogService: RssCatalogService {
         do {
             data = try await networkClient.data(from: source.url)
         } catch let error as NetworkClientError {
-            return RssCatalogResult(catalogSource: source, rssUrls: [], error: RssCatalogServiceError(networkError: error))
+            return RssCatalogResult(
+                catalogSource: source,
+                rssSnapshots: [],
+                error: RssCatalogServiceError(networkError: error)
+            )
         } catch {
-            return RssCatalogResult(catalogSource: source, rssUrls: [], error: RssCatalogServiceError(networkError: error))
+            return RssCatalogResult(
+                catalogSource: source,
+                rssSnapshots: [],
+                error: RssCatalogServiceError(networkError: error)
+            )
         }
 
         do {
-            let urls = try parser.parse(data: data, baseURL: source.url)
-            return RssCatalogResult(catalogSource: source, rssUrls: urls, error: nil)
+            let items = try parser.parse(data: data, baseURL: source.url)
+            return RssCatalogResult(catalogSource: source, rssSnapshots: items, error: nil)
         } catch let error as RssCatalogParsingError {
             return RssCatalogResult(
                 catalogSource: source,
-                rssUrls: [],
+                rssSnapshots: [],
                 error: RssCatalogServiceError(parsingError: error)
             )
         } catch {
             return RssCatalogResult(
                 catalogSource: source,
-                rssUrls: [],
+                rssSnapshots: [],
                 error: RssCatalogServiceError(parsingError: error)
             )
         }

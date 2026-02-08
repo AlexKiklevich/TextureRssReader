@@ -65,11 +65,10 @@ final class RealmProvider: @unchecked Sendable {
                         let realm = try Realm(configuration: configuration)
                         let object = StoredRssCatalog(result: result)
                         try realm.write {
-                            if let existingObject = realm.object(
-                                ofType: StoredRssCatalog.self,
-                                forPrimaryKey: object.id
-                            ) {
-                                realm.delete(existingObject)
+                            let duplicates = realm.objects(StoredRssCatalog.self)
+                                .filter("catalogSourceURL == %@", result.catalogSource.url.absoluteString)
+                            if !duplicates.isEmpty {
+                                realm.delete(duplicates)
                             }
                             realm.add(object, update: .modified)
                         }
@@ -88,10 +87,9 @@ final class RealmProvider: @unchecked Sendable {
                 autoreleasepool {
                     do {
                         let realm = try Realm(configuration: configuration)
-                        let object = realm.object(
-                            ofType: StoredRssCatalog.self,
-                            forPrimaryKey: source.url.absoluteString
-                        )
+                        let object = realm.objects(StoredRssCatalog.self)
+                            .filter("catalogSourceURL == %@", source.url.absoluteString)
+                            .first
                         continuation.resume(returning: object?.toRssCatalogResult())
                     } catch {
                         continuation.resume(throwing: error)

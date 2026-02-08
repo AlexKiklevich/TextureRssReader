@@ -13,5 +13,5 @@ struct RssItem: Hashable {
     let summary: String?
     let publishedAt: Date?
     let imageURL: URL?
-    let source: RssItemSource
+    let parentCatalog: RssCatalogSource
 }

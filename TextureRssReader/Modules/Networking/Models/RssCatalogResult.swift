@@ -9,6 +9,6 @@ import Foundation
 
 struct RssCatalogResult: Hashable {
     let catalogSource: RssCatalogSource
-    let rssUrls: [URL]
+    let rssSnapshots: [RssItemSnapshot]
     let error: RssCatalogServiceError?
 }

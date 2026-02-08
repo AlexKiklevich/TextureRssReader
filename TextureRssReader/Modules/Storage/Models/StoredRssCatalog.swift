@@ -12,6 +12,7 @@ final class StoredRssCatalog: Object {
     @Persisted(primaryKey: true) var id: Int = 0
     @Persisted var catalogSourceTitle: String = ""
     @Persisted var catalogSourceURL: String = ""
+    @Persisted var rssTitles: List<String>
     @Persisted var rssUrls: List<String>
     @Persisted var storedAt: Date = Date()
 
@@ -22,8 +23,9 @@ final class StoredRssCatalog: Object {
         catalogSourceURL = result.catalogSource.url.absoluteString
         storedAt = Date()
 
-        for url in result.rssUrls {
-            rssUrls.append(url.absoluteString)
+        for snapshot in result.rssSnapshots {
+            rssTitles.append(snapshot.title)
+            rssUrls.append(snapshot.url.absoluteString)
         }
     }
 
@@ -32,10 +34,22 @@ final class StoredRssCatalog: Object {
             return nil
         }
         let catalogSource = RssCatalogSource(title: catalogSourceTitle, url: parsedCatalogSourceURL)
-        let mappedUrls: [URL] = rssUrls.compactMap(URL.init(string:))
+        var mappedSnapshots: [RssItemSnapshot] = []
+
+        for (index, urlString) in rssUrls.enumerated() {
+            guard let url = URL(string: urlString) else { continue }
+            let title = rssTitles.indices.contains(index) ? rssTitles[index] : urlString
+            mappedSnapshots.append(
+                RssItemSnapshot(
+                    title: title,
+                    url: url
+                )
+            )
+        }
+
         return RssCatalogResult(
             catalogSource: catalogSource,
-            rssUrls: mappedUrls,
+            rssSnapshots: mappedSnapshots,
             error: nil
         )
     }

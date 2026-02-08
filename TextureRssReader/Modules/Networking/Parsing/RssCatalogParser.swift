@@ -14,16 +14,22 @@ final class RssCatalogParser {
         static let urlIndicators = ["http://", "https://", "www.", "/rss"]
     }
     
-    func parse(data: Data, baseURL: URL?) throws -> [URL] {
+    func parse(data: Data, baseURL: URL?) throws -> [RssItemSnapshot] {
         guard let html = String(data: data, encoding: .utf8) else {
             throw RssCatalogParsingError.invalidEncoding
         }
 
-        var items: [URL] = []
+        var items: [RssItemSnapshot] = []
         var seen = Set<URL>()
         var index = html.startIndex
+        var lastLabel: String?
 
         while let anchorStart = html.range(of: "<a", options: [.caseInsensitive], range: index..<html.endIndex) {
+            let textChunk = String(html[index..<anchorStart.lowerBound])
+            if let labelCandidate = Self.lastLabelCandidate(from: textChunk) {
+                lastLabel = labelCandidate
+            }
+            
             guard let tagEnd = html.range(of: ">", range: anchorStart.lowerBound..<html.endIndex) else {
                 break
             }
@@ -43,7 +49,8 @@ final class RssCatalogParser {
             guard Self.isLikelyRssURL(url) else { continue }
             guard !seen.contains(url) else { continue }
 
-            items.append(url)
+            let resolvedTitle = Self.resolveTitle(anchorText: anchorText, fallback: lastLabel, url: url)
+            items.append(RssItemSnapshot(title: resolvedTitle, url: url))
             seen.insert(url)
         }
 
@@ -103,5 +110,29 @@ private extension RssCatalogParser {
             return attributed.string
         }
         return text
+    }
+    
+    static func resolveTitle(anchorText: String, fallback: String?, url: URL) -> String {
+        let cleanedAnchor = cleanText(anchorText)
+        if cleanedAnchor.isEmpty || looksLikeURL(cleanedAnchor) {
+            if let fallback, !fallback.isEmpty {
+                return fallback
+            }
+        }
+        if cleanedAnchor.isEmpty {
+            return url.absoluteString
+        }
+        return cleanedAnchor
+    }
+
+    static func lastLabelCandidate(from text: String) -> String? {
+        let cleaned = cleanText(text)
+        guard !cleaned.isEmpty else { return nil }
+        let separators = CharacterSet(charactersIn: "\n\r•|—")
+        let parts = cleaned
+            .components(separatedBy: separators)
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        return parts.last
     }
 }

@@ -6,60 +6,88 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
 final class MainViewController: UIViewController {
-    private let rssManager = RssManager()
-    private let realmProvider = RealmProvider()
+    private let viewModel = MainViewModel()
+    private let mainViewNode = MainView()
+    private let screenTitleLabel = UILabel()
+    private let displayModeButton = UIButton(type: .system)
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [screenTitleLabel, displayModeButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .center
+        return stackView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.80, green: 0.95, blue: 0.80, alpha: 1.0)
-        Task {
-            await loadRssChannels()
+        view.backgroundColor = .systemBackground
+        setupMainView()
+        setupNavigationBar()
+        setupMainViewCallbacks()
+        viewModel.delegate = self
+        viewModel.viewDidLoad()
+    }
+
+    private func setupMainView() {
+        let nodeView = mainViewNode.view
+        nodeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(nodeView)
+
+        NSLayoutConstraint.activate([
+            nodeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            nodeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            nodeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            nodeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    private func setupNavigationBar() {
+        screenTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        screenTitleLabel.textColor = .label
+        screenTitleLabel.adjustsFontForContentSizeCategory = true
+        screenTitleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        displayModeButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        displayModeButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        displayModeButton.setContentHuggingPriority(.required, for: .horizontal)
+        displayModeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        displayModeButton.addTarget(self, action: #selector(toggleDisplayMode), for: .touchUpInside)
+        displayModeButton.accessibilityTraits = .button
+
+        navigationItem.titleView = titleStackView
+    }
+
+    private func setupMainViewCallbacks() {
+        mainViewNode.onToggleSection = { [weak self] sectionID in
+            self?.viewModel.toggleSection(id: sectionID)
         }
     }
 
-    private func loadRssChannels() async {
-        guard let urlVedomosti = URL(string: "https://www.vedomosti.ru/info/rss"),
-              let urlRbc = URL(string: "https://rssexport.rbc.ru/rbcnews/news/30/full.rss") else {
-            return
-        }
-        let sources = [
-            RssCatalogSource(title: "Vedomosti", url: urlVedomosti),
-            RssCatalogSource(title: "Rbc", url: urlRbc)
-        ]
-        rssManager.performFetch(catalogs: sources, delegate: self)
+    @objc
+    private func toggleDisplayMode() {
+        viewModel.toggleDisplayMode()
     }
 }
 
-extension MainViewController: RssManagerDelegate {
-    func didReceiveCatalog(_ result: RssCatalogResult, source: RssCatalogSource) {
-        print(result)
-    }
-    
-    func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssItemSource]) {
-        guard let items = result.first?.items else {
-            return
-        }
-        Task.detached { [weak self] in
-            do {
-                try await self?.realmProvider.saveRss(items: items)
-            }
-            catch let error {
-                print("Failed to save items: \(error)")
-                return
-            }
-            do {
-                let items = try await self?.realmProvider.readRss(catalogs: items.map { $0.source.catalog })
-                print("Saved items: \(items ?? [])")
-            }
-            catch let error {
-                print("Failed to fetch items: \(error)")
-            }
-        }
-    }
-    
-    func didReceiveUnsupported(_ result: RssUnsupportedResult, url: URL) {
-        print(result)
+extension MainViewController: MainViewModelDelegate {
+    func mainViewModel(
+        _ viewModel: MainViewModel,
+        didUpdateScreenTitle screenTitle: String,
+        navigationButtonTitle: String,
+        displayMode: NewsDisplayMode,
+        sections: [NewsSectionModel],
+        cellViewModelsBySectionID: [UUID: [NewsCellViewModel]]
+    ) {
+        title = screenTitle
+        screenTitleLabel.text = screenTitle
+        displayModeButton.setTitle(navigationButtonTitle, for: .normal)
+        mainViewNode.update(
+            sections: sections,
+            cellViewModelsBySectionID: cellViewModelsBySectionID,
+            displayMode: displayMode
+        )
     }
 }

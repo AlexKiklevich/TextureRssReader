@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RssService {
-    func fetchItems(sources: [RssItemSource]) async -> [RssFeedResult]
+    func fetchItems(snapshots: [RssItemSnapshot], parentCatalog: RssCatalogSource) async -> [RssFeedResult]
 }
 
 final class DefaultRssService: RssService {
@@ -23,12 +23,13 @@ final class DefaultRssService: RssService {
         self.parserFactory = parserFactory
     }
 
-    func fetchItems(sources: [RssItemSource]) async -> [RssFeedResult] {
+    func fetchItems(snapshots: [RssItemSnapshot], parentCatalog: RssCatalogSource) async -> [RssFeedResult] {
         await withTaskGroup(of: RssFeedResult.self) { group in
-            for source in sources {
+            for snapshot in snapshots {
                 group.addTask { [networkClient, parserFactory] in
                     await self.fetch(
-                        source: source,
+                        snapshot: snapshot,
+                        parentCatalog: parentCatalog,
                         networkClient: networkClient,
                         parser: parserFactory()
                     )
@@ -44,17 +45,28 @@ final class DefaultRssService: RssService {
     }
 
     private func fetch(
-        source: RssItemSource,
+        snapshot: RssItemSnapshot,
+        parentCatalog: RssCatalogSource,
         networkClient: NetworkClient,
         parser: RssFeedParser
     ) async -> RssFeedResult {
         let data: Data
         do {
-            data = try await networkClient.data(from: source.url)
+            data = try await networkClient.data(from: snapshot.url)
         } catch let error as NetworkClientError {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
+            return RssFeedResult(
+                snapshot: snapshot,
+                items: [],
+                parentCatalog: parentCatalog,
+                error: RssServiceError(networkError: error)
+            )
         } catch {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(networkError: error))
+            return RssFeedResult(
+                snapshot: snapshot,
+                items: [],
+                parentCatalog: parentCatalog,
+                error: RssServiceError(networkError: error)
+            )
         }
 
         do {
@@ -66,14 +78,24 @@ final class DefaultRssService: RssService {
                     summary: parsed.summary,
                     publishedAt: parsed.publishedAt,
                     imageURL: parsed.imageURL,
-                    source: source
+                    parentCatalog: parentCatalog
                 )
             }
-            return RssFeedResult(source: source, items: items, error: nil)
+            return RssFeedResult(snapshot: snapshot, items: items, parentCatalog: parentCatalog, error: nil)
         } catch let error as RssParsingError {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(parsingError: error))
+            return RssFeedResult(
+                snapshot: snapshot,
+                items: [],
+                parentCatalog: parentCatalog,
+                error: RssServiceError(parsingError: error)
+            )
         } catch {
-            return RssFeedResult(source: source, items: [], error: RssServiceError(parsingError: error))
+            return RssFeedResult(
+                snapshot: snapshot,
+                items: [],
+                parentCatalog: parentCatalog,
+                error: RssServiceError(parsingError: error)
+            )
         }
     }
 }

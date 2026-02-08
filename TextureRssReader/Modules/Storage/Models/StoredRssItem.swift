@@ -17,7 +17,6 @@ final class StoredRssItem: Object {
     @Persisted var imageURL: String?
     @Persisted var catalogTitle: String = ""
     @Persisted var catalogURL: String = ""
-    @Persisted var itemSourceURL: String = ""
     @Persisted var storedAt: Date = Date()
 
     convenience init(item: RssItem) {
@@ -28,31 +27,28 @@ final class StoredRssItem: Object {
         summary = item.summary
         publishedAt = item.publishedAt
         imageURL = item.imageURL?.absoluteString
-        catalogTitle = item.source.catalog.title
-        catalogURL = item.source.catalog.url.absoluteString
-        itemSourceURL = item.source.url.absoluteString
+        catalogTitle = item.parentCatalog.title
+        catalogURL = item.parentCatalog.url.absoluteString
         storedAt = Date()
     }
 
     func toRssItem() -> RssItem? {
-        guard let parsedCatalogSourceURL = URL(string: catalogURL),
-              let parsedItemSourceURL = URL(string: itemSourceURL) else {
+        guard let parsedCatalogSourceURL = URL(string: catalogURL) else {
             return nil
         }
-        let catalogSource = RssCatalogSource(title: catalogTitle, url: parsedCatalogSourceURL)
-        let itemSource = RssItemSource(catalog: catalogSource, url: parsedItemSourceURL)
+        let parentCatalog = RssCatalogSource(title: catalogTitle, url: parsedCatalogSourceURL)
         return RssItem(
             title: title,
             link: link.flatMap(URL.init(string:)),
             summary: summary,
             publishedAt: publishedAt,
             imageURL: imageURL.flatMap(URL.init(string:)),
-            source: itemSource
+            parentCatalog: parentCatalog
         )
     }
 
     private static func makeID(for item: RssItem) -> String {
-        let sourcePart = item.source.url.absoluteString
+        let sourcePart = item.parentCatalog.url.absoluteString
         if let link = item.link?.absoluteString, !link.isEmpty {
             return sourcePart + "|" + link
         }

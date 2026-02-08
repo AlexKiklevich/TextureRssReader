@@ -9,7 +9,7 @@ import Foundation
 
 protocol RssManagerDelegate {
     func didReceiveCatalog(_ result: RssCatalogResult, source: RssCatalogSource)
-    func didReceiveFeedItems(_ result: [RssFeedResult], sources: [RssItemSource])
+    func didReceiveFeedItems(_ result: [RssFeedResult], snapshots: [RssItemSnapshot])
     func didReceiveUnsupported(_ result: RssUnsupportedResult, url: URL)
 }
 
@@ -41,7 +41,9 @@ final class RssManager {
         switch classification {
         case .feed:
             Task {
-                await handleFeed(RssItemSource(catalog: source, url: source.url), delegate: delegate)
+                await handleFeed(
+                    RssItemSnapshot(title: source.title, url: source.url), parentCatalog: source, delegate: delegate
+                )
             }
         case .catalog:
             Task {
@@ -50,24 +52,28 @@ final class RssManager {
         }
     }
 
-    private func handleFeed(_ source: RssItemSource, delegate: RssManagerDelegate) async {
-        let feedResults = await rssService.fetchItems(sources: [source])
+    private func handleFeed(
+        _ snapshot: RssItemSnapshot,
+        parentCatalog: RssCatalogSource,
+        delegate: RssManagerDelegate
+    ) async {
+        let feedResults = await rssService.fetchItems(snapshots: [snapshot], parentCatalog: parentCatalog)
         guard let feedResult = feedResults.first else {
-            let fallback = RssUnsupportedResult(url: source.url, reason: .notRss)
-            delegate.didReceiveUnsupported(fallback, url: source.url)
+            let fallback = RssUnsupportedResult(url: snapshot.url, reason: .notRss)
+            delegate.didReceiveUnsupported(fallback, url: snapshot.url)
             return
         }
         guard let error = feedResult.error else {
-            delegate.didReceiveFeedItems(feedResults, sources: [source])
+            delegate.didReceiveFeedItems(feedResults, snapshots: [snapshot])
             return
         }
         guard case .network(let underlying) = error else {
-            let unsupported = RssUnsupportedResult(url: source.url, reason: .notRss)
-            delegate.didReceiveUnsupported(unsupported, url: source.url)
+            let unsupported = RssUnsupportedResult(url: snapshot.url, reason: .notRss)
+            delegate.didReceiveUnsupported(unsupported, url: snapshot.url)
             return
         }
-        let unsupported = RssUnsupportedResult(url: source.url, reason: .network(underlying: underlying))
-        delegate.didReceiveUnsupported(unsupported, url: source.url)
+        let unsupported = RssUnsupportedResult(url: snapshot.url, reason: .network(underlying: underlying))
+        delegate.didReceiveUnsupported(unsupported, url: snapshot.url)
     }
 
     private func handleCatalog(_ source: RssCatalogSource, delegate: RssManagerDelegate) async {
