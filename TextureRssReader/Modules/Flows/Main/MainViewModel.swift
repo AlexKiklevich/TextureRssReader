@@ -39,6 +39,7 @@ final class MainViewModel {
     private var pendingCallbacks = 0
     private var sectionsByCatalog: [String: NewsSectionModel] = [:]
     private var sectionOrder: [String] = []
+    private var readNewsKeys: Set<String> = []
     private var hasPendingUIUpdate = false
     private var pendingUIWorkItem: DispatchWorkItem?
 
@@ -82,7 +83,16 @@ final class MainViewModel {
     }
 
     func selectNews(_ newsCellViewModel: NewsCellViewModel) {
-        coordinator?.showNewspaper(with: newsCellViewModel)
+        guard let coordinator else { return }
+
+        let didUpdateReadState = markNewsAsRead(newsCellViewModel.item)
+        let selectedItem = makeReadItem(from: newsCellViewModel.item)
+        let selectedViewModel = NewsCellViewModel(item: selectedItem, imageService: imageService)
+
+        if didUpdateReadState {
+            notifyDelegate()
+        }
+        coordinator.showNewspaper(with: selectedViewModel)
     }
 }
 
@@ -117,10 +127,13 @@ private extension MainViewModel {
             }.map(\.element)
 
             let items = sortedItems.map {
-                NewsRowModel(
+                let key = newsKey(for: $0)
+                return NewsRowModel(
                     title: $0.title,
                     summary: $0.summary,
-                    imageURL: $0.imageURL
+                    imageURL: $0.imageURL,
+                    linkURL: $0.link,
+                    isRead: readNewsKeys.contains(key)
                 )
             }
             let sectionKey = result.parentCatalog.url.absoluteString
@@ -215,6 +228,50 @@ private extension MainViewModel {
         guard hasPendingUIUpdate else { return }
         hasPendingUIUpdate = false
         notifyDelegate()
+    }
+
+    func markNewsAsRead(_ item: NewsRowModel) -> Bool {
+        let key = newsKey(for: item)
+        let inserted = readNewsKeys.insert(key).inserted
+        var didUpdateItem = false
+
+        for (sectionKey, var section) in sectionsByCatalog {
+            guard let itemIndex = section.items.firstIndex(where: { $0.id == item.id }) else {
+                continue
+            }
+            guard !section.items[itemIndex].isRead else {
+                continue
+            }
+
+            section.items[itemIndex].isRead = true
+            sectionsByCatalog[sectionKey] = section
+            didUpdateItem = true
+        }
+
+        return inserted || didUpdateItem
+    }
+
+    func makeReadItem(from item: NewsRowModel) -> NewsRowModel {
+        guard !item.isRead else { return item }
+        var updated = item
+        updated.isRead = true
+        return updated
+    }
+
+    func newsKey(for item: RssItem) -> String {
+        if let link = item.link?.absoluteString, !link.isEmpty {
+            return "link:\(link)"
+        }
+        let summary = item.summary ?? ""
+        return "text:\(item.title.lowercased())|\(summary.lowercased())"
+    }
+
+    func newsKey(for item: NewsRowModel) -> String {
+        if let link = item.linkURL?.absoluteString, !link.isEmpty {
+            return "link:\(link)"
+        }
+        let summary = item.summary ?? ""
+        return "text:\(item.title.lowercased())|\(summary.lowercased())"
     }
 }
 

@@ -23,6 +23,7 @@ final class NewsExtendedCell: ASCellNode {
     private let titleNode = ASTextNode()
     private let summaryNode = ASTextNode()
     private var titleText = ""
+    private var titleColor: UIColor = .label
     private var cachedTitleWidth: CGFloat = 0
 
     init(viewModel: NewsCellViewModel) {
@@ -53,11 +54,15 @@ final class NewsExtendedCell: ASCellNode {
 
         titleNode.style.flexShrink = 1
         summaryNode.style.flexShrink = 1
+        var textChildren: [ASLayoutElement] = [titleNode]
+        if summaryNode.attributedText != nil {
+            textChildren.append(summaryNode)
+        }
 
         let textColumn = ASStackLayoutSpec.vertical()
         textColumn.spacing = 6
         textColumn.alignItems = .stretch
-        textColumn.children = summaryNode.attributedText == nil ? [titleNode] : [titleNode, summaryNode]
+        textColumn.children = textChildren
         textColumn.style.flexGrow = 1
         textColumn.style.flexShrink = 1
 
@@ -86,6 +91,7 @@ private extension NewsExtendedCell {
 
     func apply(item: NewsRowModel) {
         titleText = item.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        titleColor = item.isRead ? .secondaryLabel : .label
         cachedTitleWidth = 0
         titleNode.maximumNumberOfLines = Constants.titleMaxLines
         titleNode.truncationMode = .byTruncatingTail
@@ -93,14 +99,15 @@ private extension NewsExtendedCell {
             string: titleText,
             attributes: [
                 .font: UIFont.preferredFont(forTextStyle: .headline),
-                .foregroundColor: UIColor.label
+                .foregroundColor: titleColor
             ]
         )
 
         if let summary = item.summary {
+            let summaryColor: UIColor = item.isRead ? .tertiaryLabel : .secondaryLabel
             let summaryAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.preferredFont(forTextStyle: .subheadline),
-                .foregroundColor: UIColor.secondaryLabel
+                .foregroundColor: summaryColor
             ]
             summaryNode.attributedText = NSAttributedString(string: summary, attributes: summaryAttributes)
             summaryNode.maximumNumberOfLines = 3
@@ -113,6 +120,7 @@ private extension NewsExtendedCell {
 
         isAccessibilityElement = true
         accessibilityTraits = .staticText
+        accessibilityValue = item.isRead ? "Read" : "Unread"
     }
 
     func updateTitleNodeIfNeeded(availableWidth: CGFloat) {
@@ -125,7 +133,7 @@ private extension NewsExtendedCell {
             string: titleText,
             attributes: [
                 .font: font,
-                .foregroundColor: UIColor.label
+                .foregroundColor: titleColor
             ]
         )
     }

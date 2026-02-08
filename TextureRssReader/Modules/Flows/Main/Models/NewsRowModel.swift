@@ -12,16 +12,22 @@ struct NewsRowModel: Hashable, Identifiable {
     let title: String
     let summary: String?
     let imageURL: URL?
+    let linkURL: URL?
+    var isRead: Bool
 
     init(
         id: UUID = UUID(),
         title: String,
         summary: String? = nil,
-        imageURL: URL? = nil
+        imageURL: URL? = nil,
+        linkURL: URL? = nil,
+        isRead: Bool = false
     ) {
         self.id = id
         self.title = title
         self.summary = summary
         self.imageURL = imageURL
+        self.linkURL = linkURL
+        self.isRead = isRead
     }
 }

@@ -58,9 +58,10 @@ private extension NewsCommonCell {
     }
 
     func apply(item: NewsRowModel) {
+        let titleColor: UIColor = item.isRead ? .secondaryLabel : .label
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.preferredFont(forTextStyle: .headline),
-            .foregroundColor: UIColor.label
+            .foregroundColor: titleColor
         ]
         titleNode.attributedText = NSAttributedString(
             string: item.title.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -73,5 +74,6 @@ private extension NewsCommonCell {
 
         isAccessibilityElement = true
         accessibilityTraits = .staticText
+        accessibilityValue = item.isRead ? "Read" : "Unread"
     }
 }
