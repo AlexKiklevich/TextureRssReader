@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>TextureRssReader.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>EB3D2B522F30C0D900FBEE25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB3D2B682F30C0DB00FBEE25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB3D2B722F30C0DB00FBEE25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
