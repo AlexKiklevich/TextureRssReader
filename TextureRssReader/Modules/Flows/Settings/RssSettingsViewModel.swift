@@ -1,8 +1,8 @@
 //
-//  SettingsViewModel.swift
+//  RssSettingsViewModel.swift
 //  TextureRssReader
 //
-//  Created by Codex on 10.02.26.
+//  Created by Aliaksandr Kiklevich on 9.02.26.
 //
 
 import Foundation
