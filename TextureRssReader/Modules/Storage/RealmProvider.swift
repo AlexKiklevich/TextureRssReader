@@ -15,48 +15,6 @@ final class RealmProvider: @unchecked Sendable {
         self.configuration = configuration
     }
 
-    func saveRss(items: [RssItem]) async throws {
-        guard !items.isEmpty else { return }
-        try await withCheckedThrowingContinuation { continuation in
-            queue.async { [self] in
-                autoreleasepool {
-                    do {
-                        let realm = try Realm(configuration: configuration)
-                        let objects = items.map(StoredRssItem.init(item:))
-                        try realm.write {
-                            realm.add(objects, update: .modified)
-                        }
-                        continuation.resume(returning: ())
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
-                }
-            }
-        }
-    }
-
-    func readRss(catalogs: [RssCatalogSource]) async throws -> [ReadResult] {
-        let result: [ReadResult] = try await withCheckedThrowingContinuation { continuation in
-            queue.async { [self] in
-                autoreleasepool {
-                    do {
-                        let realm = try Realm(configuration: configuration)
-                        let objects = realm.objects(StoredRssItem.self)
-                        var results = [ReadResult]()
-                        for catalog in catalogs {
-                            let items = objects.filter("catalogURL == %@", catalog.url.absoluteString)
-                            results.append(ReadResult(catalog: catalog, rssItems: items.compactMap { $0.toRssItem() }))
-                        }
-                        continuation.resume(returning: results)
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
-                }
-            }
-        }
-        return result
-    }
-
     func saveCatalog(result: RssCatalogResult) async throws {
         try await withCheckedThrowingContinuation { continuation in
             queue.async { [self] in
@@ -91,6 +49,23 @@ final class RealmProvider: @unchecked Sendable {
                             .filter("catalogSourceURL == %@", source.url.absoluteString)
                             .first
                         continuation.resume(returning: object?.toRssCatalogResult())
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    func readCatalogs() async throws -> [RssCatalogResult]? {
+        let result: [RssCatalogResult]? = try await withCheckedThrowingContinuation { continuation in
+            queue.async { [self] in
+                autoreleasepool {
+                    do {
+                        let realm = try Realm(configuration: configuration)
+                        let objects: [RssCatalogResult] = realm.objects(StoredRssCatalog.self).compactMap{ $0.toRssCatalogResult() }
+                        continuation.resume(returning: objects)
                     } catch {
                         continuation.resume(throwing: error)
                     }

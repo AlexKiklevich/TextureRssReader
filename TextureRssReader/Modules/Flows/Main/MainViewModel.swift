@@ -21,10 +21,6 @@ protocol MainViewModelDelegate: AnyObject {
 final class MainViewModel {
     private enum Constants {
         static let screenTitle = "News"
-        static let vedomostiTitle = "Vedomosti"
-        static let rbcTitle = "Rbc"
-        static let vedomostiURL = "https://www.vedomosti.ru/info/rss"
-        static let rbcURL = "https://rssexport.rbc.ru/rbcnews/news/30/full.rss"
         static let uiUpdateThrottleInterval: TimeInterval = 0.12
     }
 
@@ -36,7 +32,7 @@ final class MainViewModel {
 
     private var displayMode: NewsDisplayMode = .common
     private var isFetching = false
-    private var pendingCallbacks = 0
+    private var activeLoadingOperations = 0
     private var sectionsByCatalog: [String: NewsSectionModel] = [:]
     private var sectionOrder: [String] = []
     private var readNewsKeys: Set<String> = []
@@ -54,17 +50,13 @@ final class MainViewModel {
         loadRssChannels()
     }
 
-    func loadRssChannels() {
+    private func loadRssChannels() {
         guard !isFetching else { return }
-        let sources = makeSources()
-        guard !sources.isEmpty else { return }
 
-        isFetching = true
-        pendingCallbacks = sources.count
         pendingUIWorkItem?.cancel()
         pendingUIWorkItem = nil
         hasPendingUIUpdate = false
-        rssManager.performFetch(catalogs: sources, delegate: self)
+        rssManager.downloadStoredCatalogs(delegate: self)
     }
 
     func toggleDisplayMode() {
@@ -97,17 +89,6 @@ final class MainViewModel {
 }
 
 private extension MainViewModel {
-    func makeSources() -> [RssCatalogSource] {
-        [
-            (Constants.vedomostiTitle, Constants.vedomostiURL),
-            (Constants.rbcTitle, Constants.rbcURL)
-        ]
-            .compactMap { title, urlString in
-                guard let url = URL(string: urlString) else { return nil }
-                return RssCatalogSource(title: title, url: url)
-            }
-    }
-
     func applyFeedResults(_ feedResults: [RssFeedResult]) {
         for result in feedResults where result.error == nil {
             let sortedItems = result.items.enumerated().sorted { lhs, rhs in
@@ -149,25 +130,6 @@ private extension MainViewModel {
                     items: items
                 )
             }
-        }
-    }
-
-    func completeCallback() -> Bool {
-        guard pendingCallbacks > 0 else { return false }
-        pendingCallbacks -= 1
-        if pendingCallbacks == 0 {
-            isFetching = false
-            return true
-        }
-        return false
-    }
-
-    func replaceCatalogCallbackWithFeeds(feedCount: Int) {
-        guard pendingCallbacks > 0 else { return }
-        pendingCallbacks -= 1
-        pendingCallbacks += feedCount
-        if pendingCallbacks == 0 {
-            isFetching = false
         }
     }
 
@@ -276,38 +238,34 @@ private extension MainViewModel {
 }
 
 extension MainViewModel: RssManagerDelegate {
-    func didReceiveCatalog(_ result: RssCatalogResult, source: RssCatalogSource) {
+    func didStartLoading() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            let rssFeeds = result.rssSnapshots.map { snapshot in
-                RssCatalogSource(title: "\(source.title). \(snapshot.title)", url: snapshot.url)
-            }
-            self.replaceCatalogCallbackWithFeeds(feedCount: rssFeeds.count)
-            if rssFeeds.isEmpty, self.pendingCallbacks == 0 {
-                self.flushPendingUIUpdate()
-                return
-            }
-            self.rssManager.performFetch(catalogs: rssFeeds, delegate: self)
+            self.activeLoadingOperations += 1
+            self.isFetching = true
         }
     }
+
+    func didFinishLoading() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.activeLoadingOperations = max(0, self.activeLoadingOperations - 1)
+            if self.activeLoadingOperations == 0 {
+                self.isFetching = false
+                self.flushPendingUIUpdate()
+            }
+        }
+    }
+
+    func didReceiveCatalog(_ _: RssCatalogResult, source _: RssCatalogSource) {}
 
     func didReceiveFeedItems(_ result: [RssFeedResult], snapshots _: [RssItemSnapshot]) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.applyFeedResults(result)
             self.requestUIUpdate()
-            if self.completeCallback() {
-                self.flushPendingUIUpdate()
-            }
         }
     }
 
-    func didReceiveUnsupported(_ _: RssUnsupportedResult, url _: URL) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            if self.completeCallback() {
-                self.flushPendingUIUpdate()
-            }
-        }
-    }
+    func didReceiveUnsupported(_ _: RssUnsupportedResult, url _: URL) {}
 }

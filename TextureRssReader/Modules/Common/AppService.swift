@@ -8,17 +8,12 @@
 import Foundation
 
 final class AppService {
-    let rssImageService: RssImageService
+    let rssImageService: RssImageService = DefaultRssImageService()
     let rssManager: RssManager
-    let realmProvider: RealmProvider
+    let realmProvider = RealmProvider()
+    let userDefaultsProvider = UserDefaultsProvider()
 
-    init(
-        rssImageService: RssImageService = DefaultRssImageService(),
-        rssManager: RssManager = RssManager(),
-        realmProvider: RealmProvider = RealmProvider()
-    ) {
-        self.rssImageService = rssImageService
-        self.rssManager = rssManager
-        self.realmProvider = realmProvider
+    init() {
+        self.rssManager = RssManager(realmProvider: realmProvider, userDefaultsProvider: userDefaultsProvider)
     }
 }

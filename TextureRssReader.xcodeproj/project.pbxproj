@@ -63,6 +63,8 @@
 		EBD7F3DD2F38EC3800529A74 /* NewspaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7F3DA2F38EC1000529A74 /* NewspaperView.swift */; };
 		EBD7F3DE2F38EC4700529A74 /* NewspaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7F3DB2F38EC2100529A74 /* NewspaperViewController.swift */; };
 		EBD7F3DF2F38EC5600529A74 /* NewspaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7F3DC2F38EC2D00529A74 /* NewspaperViewModel.swift */; };
+		EBD804A42F39A33E00EA5405 /* DefaultCatalogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD804A32F39A33E00EA5405 /* DefaultCatalogs.swift */; };
+		EBD804A62F39A4BD00EA5405 /* UserDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD804A52F39A4BD00EA5405 /* UserDefaultsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,8 @@
 		EBD7F3DA2F38EC1000529A74 /* NewspaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewspaperView.swift; sourceTree = "<group>"; };
 		EBD7F3DB2F38EC2100529A74 /* NewspaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewspaperViewController.swift; sourceTree = "<group>"; };
 		EBD7F3DC2F38EC2D00529A74 /* NewspaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewspaperViewModel.swift; sourceTree = "<group>"; };
+		EBD804A32F39A33E00EA5405 /* DefaultCatalogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCatalogs.swift; sourceTree = "<group>"; };
+		EBD804A52F39A4BD00EA5405 /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +224,7 @@
 				EB257DBA2F3880EA00BE6032 /* NewsDisplayMode.swift */,
 				EB257DB62F3880C100BE6032 /* NewsRowModel.swift */,
 				EB257DB82F3880D500BE6032 /* NewsSectionModel.swift */,
+				EBD804A32F39A33E00EA5405 /* DefaultCatalogs.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 			children = (
 				EB976B3A2F37886F00ABBE20 /* Models */,
 				EB39D4FB2F374C4100C7E75C /* RealmProvider.swift */,
+				EBD804A52F39A4BD00EA5405 /* UserDefaultsProvider.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -717,6 +723,7 @@
 				EB39D50A2F374C4100C7E75C /* NetworkClientError.swift in Sources */,
 				EBD7F3D72F38EA2300529A74 /* MainFlowCoordinator.swift in Sources */,
 				EB39D50B2F374C4100C7E75C /* RssCatalogParsingError.swift in Sources */,
+				EBD804A62F39A4BD00EA5405 /* UserDefaultsProvider.swift in Sources */,
 				EBD7F3D52F38EA0800529A74 /* Router.swift in Sources */,
 				EBD7F3DF2F38EC5600529A74 /* NewspaperViewModel.swift in Sources */,
 				EB39D50C2F374C4100C7E75C /* RssCatalogServiceError.swift in Sources */,
@@ -728,6 +735,7 @@
 				EB39D5102F374C4100C7E75C /* RssCatalogResult.swift in Sources */,
 				EB39D5112F374C4100C7E75C /* RssFeedResult.swift in Sources */,
 				EB39D5122F374C4100C7E75C /* RssItem.swift in Sources */,
+				EBD804A42F39A33E00EA5405 /* DefaultCatalogs.swift in Sources */,
 				EB257DBE2F38923E00BE6032 /* RssImageService.swift in Sources */,
 				EB39D5132F374C4100C7E75C /* RssCatalogSource.swift in Sources */,
 				EB257DC32F38A18100BE6032 /* MainFlowBuilder.swift in Sources */,
