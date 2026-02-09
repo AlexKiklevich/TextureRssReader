@@ -12,6 +12,7 @@ protocol MainViewModelDelegate: AnyObject {
         _ viewModel: MainViewModel,
         didUpdateScreenTitle screenTitle: String,
         navigationButtonTitle: String,
+        isForceRefreshEnabled: Bool,
         displayMode: NewsDisplayMode,
         sections: [NewsSectionModel],
         cellViewModelsBySectionID: [UUID: [NewsCellViewModel]]
@@ -26,6 +27,7 @@ final class MainViewModel {
 
     private let rssManager: RssManager
     private let imageService: RssImageService
+    private let userDefaultsProvider: UserDefaultsProvider
 
     weak var delegate: MainViewModelDelegate?
     weak var coordinator: MainFlowCoordinating?
@@ -38,21 +40,26 @@ final class MainViewModel {
     private var readNewsKeys: Set<String> = []
     private var hasPendingUIUpdate = false
     private var pendingUIWorkItem: DispatchWorkItem?
+    private var reloadTimer: Timer?
+    private var shouldReloadAfterCurrentFetch = false
 
     init(coordinator: MainFlowCoordinating, appService: AppService) {
         self.coordinator = coordinator
         self.rssManager = appService.rssManager
         self.imageService = appService.rssImageService
+        self.userDefaultsProvider = appService.userDefaultsProvider
     }
 
     func viewDidLoad() {
         notifyDelegate()
+        configureReloadTimer()
         loadRssChannels()
     }
 
     private func loadRssChannels() {
         guard !isFetching else { return }
 
+        setFetchingState(true)
         pendingUIWorkItem?.cancel()
         pendingUIWorkItem = nil
         hasPendingUIUpdate = false
@@ -85,6 +92,26 @@ final class MainViewModel {
             notifyDelegate()
         }
         coordinator.showNewspaper(with: selectedViewModel)
+    }
+
+    func openSettings() {
+        coordinator?.showSettings { [weak self] in
+            DispatchQueue.main.async {
+                self?.applySettingsChanges()
+            }
+        }
+    }
+
+    func forceRefresh() {
+        if isFetching {
+            shouldReloadAfterCurrentFetch = true
+            return
+        }
+        loadRssChannels()
+    }
+
+    deinit {
+        reloadTimer?.invalidate()
     }
 }
 
@@ -160,10 +187,17 @@ private extension MainViewModel {
             self,
             didUpdateScreenTitle: Constants.screenTitle,
             navigationButtonTitle: displayMode.navigationButtonTitle,
+            isForceRefreshEnabled: !isFetching,
             displayMode: displayMode,
             sections: sections,
             cellViewModelsBySectionID: makeCellViewModelsBySectionID(from: sections)
         )
+    }
+
+    func setFetchingState(_ newValue: Bool) {
+        guard isFetching != newValue else { return }
+        isFetching = newValue
+        notifyDelegate()
     }
 
     func requestUIUpdate() {
@@ -190,6 +224,31 @@ private extension MainViewModel {
         guard hasPendingUIUpdate else { return }
         hasPendingUIUpdate = false
         notifyDelegate()
+    }
+
+    func configureReloadTimer() {
+        reloadTimer?.invalidate()
+        let interval = userDefaultsProvider.getPrefferedReloadTimerInterval()
+        guard interval > 0 else { return }
+
+        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            self?.loadRssChannels()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        reloadTimer = timer
+    }
+
+    func applySettingsChanges() {
+        configureReloadTimer()
+        sectionsByCatalog.removeAll()
+        sectionOrder.removeAll()
+        notifyDelegate()
+
+        if isFetching {
+            shouldReloadAfterCurrentFetch = true
+            return
+        }
+        loadRssChannels()
     }
 
     func markNewsAsRead(_ item: NewsRowModel) -> Bool {
@@ -241,8 +300,10 @@ extension MainViewModel: RssManagerDelegate {
     func didStartLoading() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            if self.activeLoadingOperations == 0 {
+                self.setFetchingState(true)
+            }
             self.activeLoadingOperations += 1
-            self.isFetching = true
         }
     }
 
@@ -251,8 +312,12 @@ extension MainViewModel: RssManagerDelegate {
             guard let self else { return }
             self.activeLoadingOperations = max(0, self.activeLoadingOperations - 1)
             if self.activeLoadingOperations == 0 {
-                self.isFetching = false
+                self.setFetchingState(false)
                 self.flushPendingUIUpdate()
+                if self.shouldReloadAfterCurrentFetch {
+                    self.shouldReloadAfterCurrentFetch = false
+                    self.loadRssChannels()
+                }
             }
         }
     }

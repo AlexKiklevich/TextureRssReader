@@ -13,6 +13,10 @@ final class UserDefaultsProvider {
         static let hasLaunchedBefore = "hasLaunchedBefore"
         static let prefferedReloadTimerInterval = "prefferedReloadTimerInterval"
     }
+
+    private struct DefaultValue {
+        static let prefferedReloadTimerInterval: TimeInterval = 300
+    }
     
     private let defaults = UserDefaults.standard
     
@@ -25,10 +29,11 @@ final class UserDefaultsProvider {
     }
     
     func getPrefferedReloadTimerInterval() -> TimeInterval {
-        defaults.double(forKey: Key.prefferedReloadTimerInterval)
+        let value = defaults.double(forKey: Key.prefferedReloadTimerInterval)
+        return value > 0 ? value : DefaultValue.prefferedReloadTimerInterval
     }
     
-    func set(prefferedReloadTimerInterval: Bool) {
+    func set(prefferedReloadTimerInterval: TimeInterval) {
         defaults.set(prefferedReloadTimerInterval, forKey: Key.prefferedReloadTimerInterval)
     }
 }

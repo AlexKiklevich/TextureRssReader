@@ -13,6 +13,7 @@ protocol Coordinator: AnyObject {
 
 protocol MainFlowCoordinating: AnyObject {
     func showNewspaper(with newsCellViewModel: NewsCellViewModel)
+    func showSettings(onSettingsChanged: @escaping () -> Void)
 }
 
 final class MainFlowCoordinator: Coordinator {
@@ -40,5 +41,13 @@ extension MainFlowCoordinator: MainFlowCoordinating {
     func showNewspaper(with newsCellViewModel: NewsCellViewModel) {
         let newspaperModule = builder.makeNewspaperModule(newsCellViewModel: newsCellViewModel)
         router.push(newspaperModule, animated: true)
+    }
+
+    func showSettings(onSettingsChanged: @escaping () -> Void) {
+        let settingsModule = builder.makeSettingsModule(
+            appService: appService,
+            onSettingsChanged: onSettingsChanged
+        )
+        router.push(settingsModule, animated: true)
     }
 }

@@ -10,6 +10,7 @@ import AsyncDisplayKit
 protocol RssImageService: ASImageCacheProtocol {
     var downloader: ASPINRemoteImageDownloader { get }
     func imageDidLoad(_ image: UIImage, withInfo info: ASNetworkImageLoadInfo)
+    func clearCache()
 }
 
 final class DefaultRssImageService: NSObject, RssImageService {
@@ -42,6 +43,10 @@ final class DefaultRssImageService: NSObject, RssImageService {
         default:
             return
         }
+    }
+
+    func clearCache() {
+        cache.removeAllObjects()
     }
     
     private func imageCost(_ image: UIImage) -> Int {

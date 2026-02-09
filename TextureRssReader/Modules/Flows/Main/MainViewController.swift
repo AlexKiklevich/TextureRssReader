@@ -13,6 +13,17 @@ final class MainViewController: UIViewController {
     private let mainViewNode = MainView()
     private let screenTitleLabel = UILabel()
     private let displayModeButton = UIButton(type: .system)
+    private lazy var forceRefreshButton = UIBarButtonItem(
+        barButtonSystemItem: .refresh,
+        target: self,
+        action: #selector(forceRefresh)
+    )
+    private lazy var settingsButton = UIBarButtonItem(
+        image: UIImage(systemName: "gearshape"),
+        style: .plain,
+        target: self,
+        action: #selector(openSettings)
+    )
     private lazy var titleStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [screenTitleLabel, displayModeButton])
         stackView.axis = .horizontal
@@ -68,6 +79,7 @@ final class MainViewController: UIViewController {
         displayModeButton.accessibilityTraits = .button
 
         navigationItem.titleView = titleStackView
+        navigationItem.rightBarButtonItems = [settingsButton, forceRefreshButton]
     }
 
     private func setupMainViewCallbacks() {
@@ -83,6 +95,16 @@ final class MainViewController: UIViewController {
     private func toggleDisplayMode() {
         viewModel.toggleDisplayMode()
     }
+
+    @objc
+    private func openSettings() {
+        viewModel.openSettings()
+    }
+
+    @objc
+    private func forceRefresh() {
+        viewModel.forceRefresh()
+    }
 }
 
 extension MainViewController: MainViewModelDelegate {
@@ -90,6 +112,7 @@ extension MainViewController: MainViewModelDelegate {
         _ viewModel: MainViewModel,
         didUpdateScreenTitle screenTitle: String,
         navigationButtonTitle: String,
+        isForceRefreshEnabled: Bool,
         displayMode: NewsDisplayMode,
         sections: [NewsSectionModel],
         cellViewModelsBySectionID: [UUID: [NewsCellViewModel]]
@@ -97,6 +120,7 @@ extension MainViewController: MainViewModelDelegate {
         title = screenTitle
         screenTitleLabel.text = screenTitle
         displayModeButton.setTitle(navigationButtonTitle, for: .normal)
+        forceRefreshButton.isEnabled = isForceRefreshEnabled
         mainViewNode.update(
             sections: sections,
             cellViewModelsBySectionID: cellViewModelsBySectionID,

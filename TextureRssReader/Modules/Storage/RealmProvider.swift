@@ -74,4 +74,91 @@ final class RealmProvider: @unchecked Sendable {
         }
         return result
     }
+
+    func upsertCatalogSource(_ source: RssCatalogSource) async throws {
+        if let existing = try await readCatalog(source: source) {
+            let updated = RssCatalogResult(
+                catalogSource: source,
+                rssSnapshots: existing.rssSnapshots,
+                error: nil
+            )
+            try await saveCatalog(result: updated)
+            return
+        }
+        let newResult = RssCatalogResult(
+            catalogSource: source,
+            rssSnapshots: [],
+            error: nil
+        )
+        try await saveCatalog(result: newResult)
+    }
+
+    func deleteCatalog(source: RssCatalogSource) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            queue.async { [self] in
+                autoreleasepool {
+                    do {
+                        let realm = try Realm(configuration: configuration)
+                        let sourceURL = source.url.absoluteString
+                        let catalogs = realm.objects(StoredRssCatalog.self)
+                            .filter("catalogSourceURL == %@", sourceURL)
+                        let items = realm.objects(StoredRssItem.self)
+                            .filter("catalogURL == %@", sourceURL)
+
+                        try realm.write {
+                            if !catalogs.isEmpty {
+                                realm.delete(catalogs)
+                            }
+                            if !items.isEmpty {
+                                realm.delete(items)
+                            }
+                        }
+                        continuation.resume(returning: ())
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+    }
+
+    func readCatalogSources() async throws -> [RssCatalogSource] {
+        let catalogs = try await readCatalogs() ?? []
+        var uniqueSources: [RssCatalogSource] = []
+        var seenURLs = Set<String>()
+
+        for catalog in catalogs {
+            let source = catalog.catalogSource
+            let key = source.url.absoluteString
+            guard seenURLs.insert(key).inserted else { continue }
+            uniqueSources.append(source)
+        }
+        return uniqueSources
+    }
+
+    func deleteAllData() async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            queue.async { [self] in
+                autoreleasepool {
+                    do {
+                        let realm = try Realm(configuration: configuration)
+                        let catalogs = realm.objects(StoredRssCatalog.self)
+                        let items = realm.objects(StoredRssItem.self)
+
+                        try realm.write {
+                            if !catalogs.isEmpty {
+                                realm.delete(catalogs)
+                            }
+                            if !items.isEmpty {
+                                realm.delete(items)
+                            }
+                        }
+                        continuation.resume(returning: ())
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+    }
 }

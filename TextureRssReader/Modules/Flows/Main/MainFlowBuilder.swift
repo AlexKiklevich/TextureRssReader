@@ -20,4 +20,12 @@ final class MainFlowBuilder {
         let viewModel = NewspaperViewModel(newsCellViewModel: newsCellViewModel)
         return NewspaperViewController(viewModel: viewModel)
     }
+
+    func makeSettingsModule(
+        appService: AppService,
+        onSettingsChanged: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = SettingsViewModel(appService: appService, onSettingsChanged: onSettingsChanged)
+        return SettingsViewController(viewModel: viewModel)
+    }
 }

@@ -56,16 +56,16 @@ final class RssManager {
                     return
                 }
 
-                guard catalogs.contains(where: { !$0.rssSnapshots.isEmpty }) else {
-                    await fetchDefaultCatalogs(delegate: delegate)
-                    return
-                }
                 for catalog in catalogs {
-                    await fetchFeedSnapshots(
-                        catalog.rssSnapshots,
-                        parentSource: catalog.catalogSource,
-                        delegate: delegate
-                    )
+                    if catalog.rssSnapshots.isEmpty {
+                        await fetchSources([catalog.catalogSource], delegate: delegate)
+                    } else {
+                        await fetchFeedSnapshots(
+                            catalog.rssSnapshots,
+                            parentSource: catalog.catalogSource,
+                            delegate: delegate
+                        )
+                    }
                 }
             }
             catch {
